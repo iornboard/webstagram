@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Login from './Login';
-import ASD from './ASD';
 import reportWebVitals from './reportWebVitals';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
@@ -17,7 +15,7 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <MuiThemeProvider theme = {theme}>
   <React.StrictMode>
-    <Login />
+    <App />
   </React.StrictMode>
   </MuiThemeProvider>,
   document.getElementById('root')
