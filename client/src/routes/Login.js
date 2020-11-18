@@ -1,4 +1,3 @@
-import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +13,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import RouterLink from 'react-router-dom/Link';
 
+import { loginUser } from '../_actions/user_action';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'; 
+import { withRouter } from 'react-router-dom';
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -27,7 +32,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
   },
@@ -39,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -58,11 +62,49 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2), //위, 좌우, 아래 마진
   },
-
-
 }));
 
-export default function SignIn() {
+function Login(props) {
+
+  const dispatch = useDispatch();
+
+  const [Email, setEmail] = useState("")
+  const [Password, setPassword] = useState("")
+
+  const onEmailHandler = (event) => {
+      setEmail(event.currentTarget.value)
+  }
+
+  const onPasswordHandler = (event) => {
+      setPassword(event.currentTarget.value)
+  }
+  const onSubmitHandler = (event) => {
+    event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
+
+    console.log('Email', Email);
+    console.log('Password', Password);
+                    
+    let body = {
+        email: Email,
+        password: Password
+    }
+
+    dispatch(loginUser(body)) //action을 취하기 위한 메서드이다.
+
+        .then(response => {
+            if (response.payload.loginSuccess) {
+                props.history.push('/') //리액트에서 페이지를 이동하는 방법이다.
+            } else {
+                alert('Error')
+            }
+        })
+
+    // Axios.post('api/users/login', body)
+    //     .then(response => { //해당 주소로 서버에 요청을 보낸다.
+            
+    //     })
+  }
+
   const classes = useStyles();
 
   return (
@@ -77,7 +119,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={onSubmitHandler} noValidate>
           <TextField
             variant="outlined" //창 윤곽
             margin="normal"
@@ -86,8 +128,10 @@ export default function SignIn() {
             id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
+            //autoComplete="email"
             autoFocus
+            value = {Email}
+            onKeyPress={onEmailHandler} 
           />
           <TextField
             variant="outlined"
@@ -98,7 +142,9 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            //autoComplete="current-password"
+            value = {Password}
+            onKeyPress={onPasswordHandler} 
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -122,7 +168,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -137,3 +183,5 @@ export default function SignIn() {
     </Grid>
   );
 }
+
+export default withRouter(Login)
