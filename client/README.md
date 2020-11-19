@@ -79,3 +79,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 3. 클라이언트에서 리덕스, 리액트 훅 등을 사용하는 코드로 업데이트 하였습니다. 또는 주석을 참고해 주세요. 최신 문법이라서 일단 사용해 보았어요. 업데이트한 문법을 사용하기 원하지 않으시면 말씀해주세요.. 괜찮으시면 이 부분에서 궁금한 부분을 말씀해주세요. 또는 아래 영상을 참고해 주시기 바랍니다. 
 https://www.youtube.com/watch?v=dJC_uAR7d60&list=PL9a7QRYt5fqkZC9jc7jntD1WuAogjo_9T&index=26
 26,27,28강입니다.
+
+4. npm install --save
+   cd client npm install --save
+   cd..
+   npm run dev 로 실행해주세요.
