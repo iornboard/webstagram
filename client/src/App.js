@@ -1,8 +1,14 @@
-import React, {Component, components} from 'react';
+import React, {Component} from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import {  
+        BrowserRouter as Router, 
+        Switch,        
+        Route
+} from 'react-router-dom';
+
 import Main from './routes/Main';
 import Login from './routes/Login';
+import SignUp from './routes/SignUp';
 
 // https://placeimg.com/64/64/any >> 아무 이미지나 가져와서 쓸 수 있음
 // 리엑트에는 key 값이 필요함, 그래서 아무 키가 될 수 있는 것을 사용할 것
@@ -17,28 +23,22 @@ import Login from './routes/Login';
 
 // props 나 state 의 변경이 있을경우) shouldComponentUpdate()
 
-class App extends Component {
-
+function App() {
 
   // 페이지 기본설정과 로딩
-
-  componentDidMount() {
-  }
-
-
   // 페이지 폼
-
-  render() {
    
     return (
       <Router>
         <div>
-          <Route exact path="/" component={Main}/>
-          <Route path="/Login" component={Login}/>
+          <Switch>
+            <Route exact path="/" component={Main}/>
+            <Route exact path="/Login" component={Login}/>
+            <Route exact path="/SignUp" component={SignUp}/>
+          </Switch>
         </div>
       </Router>
     );
-  }
 }
 
 export default App;
