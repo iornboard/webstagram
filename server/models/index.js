@@ -1,7 +1,8 @@
 // const Sequelize = require('sequelize');
 // const env = process.env.NODE_ENV || 'development'; 
 // const config = require('../config/config')[env];  
-// const { User } = require('./models/User');
+// const Post = require('./post');
+
 
 
 // // db 객체를 생성중이다. 
