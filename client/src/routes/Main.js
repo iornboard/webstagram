@@ -63,8 +63,20 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-function Main() {
+
+function Main(props) {
   const classes = useStyles();
+
+  const onClickHandler = () => {
+    Axios.get('/api/users/logout')
+        .then(response => {
+            if(response.data.success) {
+                props.history.push("/login")
+            } else {
+                alert('로그아웃 하는데 실패 했습니다.')
+            }
+        })
+  }
 
   return (
     <React.Fragment>
@@ -75,6 +87,9 @@ function Main() {
           <Typography variant="h6" color="inherit" noWrap>
             Album layout
           </Typography>
+          <button onClick={onClickHandler}>
+            테스트용 로그아웃 버튼입니다.
+          </button>
         </Toolbar>
       </AppBar>
       <main>

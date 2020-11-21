@@ -70,7 +70,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-//수정사항
+//수정사항 20201119
 
 1. 백엔드 서버를 구축하였습니다. 로그인 기능, 회원가입 및 인증 기능을 구현하였습니다. 
 
@@ -84,3 +84,29 @@ https://www.youtube.com/watch?v=dJC_uAR7d60&list=PL9a7QRYt5fqkZC9jc7jntD1WuAogjo
    cd client npm install --save
    cd..
    npm run dev 로 실행해주세요.
+
+//수정사항 20201121
+
+1. mongodbURI부분에서 유저 패스워드 부분을 변경하였습니다. 카카오톡에 올려드린 것을 참고하여 mongodb에 로그인 후 테스트해주세요.
+
+2. 프런트 단에서 속성값과 속성명을 인식하지 못하는 에러가 발생하여 수정하였어요. client/routes/Login.js파일의 maxWidth속성의 값을 100%에서 기본값인 lg로, maxHight속성의 이름을 maxheight로 수정하였습니다. 혹시 다른 기능을 생각하신 것이 있으시면 말씀해주세요..
+
+3. Login페이지에서 signin버튼을 누르면 프런트 단에서 RouterLink태그를 사용하여 main페이지로 리다이렉트되던 부분을 지웠습니다. client/routes/Login.js파일을 수정하여 로그인 성공 시에만 main페이지로 리다이렉트하도록 하였습니다.
+로그인 실패시에는 로그인페이지에 머무르도록 하기 위해서 그렇게 하였어요.. 혹시 다른 기능을 생각하신 것이 있으시면 말씀해주세요.
+
+4. 프런트 단에 이벤트 핸들러 값을 form태그에 잘못 주어 로그인 요청이 전달되지 않았었습니다. signin버튼 태그에 이벤트 핸들러를 주어 입력값과 함께 로그인 요청을 보내도록 수정하였습니다. 
+
+5. 로그인 요청시 이메일이 db에 없으면 "제공된 이메일에 해당하는 유저가 없습니다."라는 메시지를 콘솔 띄우고 이메일이 db에 있지만 비밀번호가 맞지 않는 경우 "비밀번호가 틀렸습니다."라는 메시지를 콘솔에 띄우도록 server/index.js파일에 코드를 추가했습니다. db를 확인하시고 이메일 값과 비밀번호 값을 다르게 주어 알림 메시지를 확인해주세요. 그리고 오류가 있으면 알려주세요.
+
+6. 사용자 인증 기능을 추가하였습니다. client/hoc/auth.js파일과 App.js파일을 참고해주세요. 로그인한 사용자의 경우 로그인 페이지와 회원가입 페이지에 접근하지 못하도록 하였습니다. 로그인 후 login페이지와 signin페이지에 접근이 안되는 것과 로그아웃 후에는 login페이지와 signin페이지에 접근이 되는 것을 확인해주세요. 그리고 오류가 있으면 알려주세요.
+
+7. 사용자 인증 기능을 테스트하기 위해 client/routes/main.js파일에 테스트용 로그아웃 버튼을 만들었습니다. 원하시는 곳에 로그아웃을 위한 태그를 만들어주시고 디자인을 완성하여 저에게 알려주세요.
+
++페이지단에서 페이지 라우팅 폴더를 정리하는 작업을 아직 못하였어요.. 작업하며 궁금한 것들을 물어보고 작업을 마치는 대로 말씀드리겠습니다.
+
+8. mongodb.com접속, email: thswlsqls@bible.ac.kr password: test1234mongodb 로그인, NetworkAccess탭에서 Add current IP Address를 클릭
+   npm install --save
+   cd client npm install --save
+   cd..
+   npm run dev 로 실행해주세요.
+

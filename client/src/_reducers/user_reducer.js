@@ -1,7 +1,7 @@
 import {
     LOGIN_USER,
-    SIGNUP_USER
-
+    SIGNUP_USER,
+    AUTH_USER
 } from '../_actions/types';
 
 export default function(state = {}, action) { //리듀서는 이전 스테이트와 액션을 갖고 다음 스테이트를 반환한다.
@@ -12,6 +12,9 @@ export default function(state = {}, action) { //리듀서는 이전 스테이트
         case SIGNUP_USER:
             return {...state, register: action.payload} //이전 스태이트와 액션을 사용한다
             break;
+        case AUTH_USER:
+            return {...state, userData: action.payload} //이전 스태이트와 액션을 사용한다
+            break;    
         default:
             return state;
     }

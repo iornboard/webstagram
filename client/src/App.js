@@ -9,6 +9,8 @@ import {
 import Main from './routes/Main';
 import Login from './routes/Login';
 import SignUp from './routes/SignUp';
+import Auth from './hoc/auth'
+
 
 // https://placeimg.com/64/64/any >> 아무 이미지나 가져와서 쓸 수 있음
 // 리엑트에는 key 값이 필요함, 그래서 아무 키가 될 수 있는 것을 사용할 것
@@ -32,9 +34,9 @@ function App() {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" component={Main}/>
-            <Route exact path="/Login" component={Login}/>
-            <Route exact path="/SignUp" component={SignUp}/>
+            <Route exact path="/" component={Auth(Main, null)}/>
+            <Route exact path="/Login" component={Auth(Login, false)}/>
+            <Route exact path="/SignUp" component={Auth(SignUp, false)}/>
           </Switch>
         </div>
       </Router>
