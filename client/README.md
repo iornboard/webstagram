@@ -84,3 +84,7 @@ https://www.youtube.com/watch?v=dJC_uAR7d60&list=PL9a7QRYt5fqkZC9jc7jntD1WuAogjo
    cd client npm install --save
    cd..
    npm run dev 로 실행해주세요.
+
+
+
+   
