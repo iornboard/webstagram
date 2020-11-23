@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
-// Components
 import Post from './Post';
-// Styles
 import { Content, Loading } from './ScrollList.styles';
-// API
 import { getUsers } from '../API';
+import { makeStyles } from '@material-ui/core/styles';
 
 
+// const useStyles = makeStyles(theme => ({
+//   paper: {
+//     marginTop: theme.spacing(8),
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//   },
+// }));
 
 
-function ScrollList() {
+function ScrollList()  {
 
 
   const [page, setPage] = useState(1);
@@ -35,10 +41,12 @@ function ScrollList() {
     loadUsers();
   }, [page]);
 
+  //const classes  =  useStyles();
+
   return (
     <div className='ScrollList'>
       <Content onScroll={handleScroll}>
-        {users && users.map((user) => <Post key={user.cell} user={user} />)}
+        { users.map((user) => <Post key={user.cell} user={user} />)}
       </Content>
       {loading && <Loading>Loading ...</Loading>}
     </div>

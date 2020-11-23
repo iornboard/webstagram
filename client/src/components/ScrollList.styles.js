@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const Content = styled.div`
   display: grid;
-  width: 100%;
-  height: 100%;
+  grid-template-columns: 1fr;
+  width: 800px;
+  height: 800px;
   margin: 0 auto;
-  margin-bottom: 100;
   overflow: auto;
 `;
 
