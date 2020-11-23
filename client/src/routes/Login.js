@@ -16,7 +16,7 @@ import Container from '@material-ui/core/Container';
 
 import { loginUser } from '../_actions/user_action';
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'; 
+import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.success.main,
   },
-  form: { 
+  form: {
     width: '50%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
@@ -73,36 +73,36 @@ function Login(props) {
   const [Password, setPassword] = useState("")
 
   const onEmailHandler = (event) => {
-      setEmail(event.currentTarget.value)
+    setEmail(event.currentTarget.value)
   }
 
   const onPasswordHandler = (event) => {
-      setPassword(event.currentTarget.value)
+    setPassword(event.currentTarget.value)
   }
   const onSubmitHandler = (event) => {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
     console.log('Email', Email);
     console.log('Password', Password);
-                    
+
     let body = {
-        email: Email,
-        password: Password
+      email: Email,
+      password: Password
     }
 
     dispatch(loginUser(body)) //action을 취하기 위한 메서드이다.
 
-        .then(response => {
-            if (response.payload.loginSuccess) {
-                props.history.push('/') //리액트에서 페이지를 이동하는 방법이다.
-            } else {
-                alert('Error')
-            }
-        })
+      .then(response => {
+        if (response.payload.loginSuccess) {
+          props.history.push('/') //리액트에서 페이지를 이동하는 방법이다.
+        } else {
+          alert('Error')
+        }
+      })
 
     // Axios.post('api/users/login', body)
     //     .then(response => { //해당 주소로 서버에 요청을 보낸다.
-            
+
     //     })
   }
 
@@ -110,78 +110,78 @@ function Login(props) {
 
   return (
     <Grid container component="main" className={classes.root}>
-    <Grid container component="main" className={classes.image}>
-    <Container component="main" maxWidth="lg" maxheight="100%">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+      <Grid container component="main" className={classes.image}>
+        <Container component="main" maxWidth="lg" maxheight="100%">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
         </Typography>
-        <form className={classes.form} onSubmit={onSubmitHandler} noValidate>
-          <TextField
-            variant="outlined" //창 윤곽
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            //autoComplete="email"
-            autoFocus
-            value = {Email}
-            onChange={onEmailHandler} 
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            //autoComplete="current-password"
-            value = {Password}
-            onChange={onPasswordHandler} 
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onSubmit={onSubmitHandler}
-            >
-              Sign In
+            <form className={classes.form} onSubmit={onSubmitHandler} noValidate>
+              <TextField
+                variant="outlined" //창 윤곽
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                //autoComplete="email"
+                autoFocus
+                value={Email}
+                onChange={onEmailHandler}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                //autoComplete="current-password"
+                value={Password}
+                onChange={onPasswordHandler}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onSubmit={onSubmitHandler}
+              >
+                Sign In
             </Button>
-         
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
+
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
               </Link>
-            </Grid>
-            <Grid item>
-              <Link href="register" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box> 
-    </Container>
-    </Grid>
+                </Grid>
+                <Grid item>
+                  <Link href="register" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Container>
+      </Grid>
     </Grid>
   );
 }
