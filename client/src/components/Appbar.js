@@ -3,8 +3,8 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -14,16 +14,18 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
-  login: {
-    marginRight: 10
+  sp: {
+    marginRight: theme.spacing(2),
   },
   grow: {
     flexGrow: 1,
   },
-  CameraIcon: {
+  menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
@@ -86,7 +88,11 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [auth, setAuth] = React.useState(true);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -169,22 +175,51 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <CameraIcon className={classes.CameraIcon} />
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            <CameraAltIcon />
+          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Webstaram
+            webstagram
           </Typography>
-          <Button onClick variant="outlined" color="default">
-            테스트용 로그아웃 버튼입니다.
-          </Button>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="검색"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Button onClick variant="outlined" color="default" className={classes.login}>
-              로그인
-          </Button>
-            <Button onClick variant="outlined" color="default">
-              회원가입
-          </Button>
+            <FormControlLabel
+              display="flex"
+              control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
+              label={auth ? 'Logout' : 'Login'}
+            />
+            <IconButton
+              className={classes.sp}
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+
           </div>
+
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
@@ -198,10 +233,8 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      { renderMobileMenu}
-      { renderMenu}
-    </div >
+      {renderMobileMenu}
+      {renderMenu}
+    </div>
   );
 }
-
-

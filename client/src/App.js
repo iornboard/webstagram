@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import {  
-        BrowserRouter as Router, 
-        Switch,        
-        Route
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
 } from 'react-router-dom';
 
 import Main from './routes/Main';
@@ -29,18 +29,18 @@ function App() {
 
   // 페이지 기본설정과 로딩
   // 페이지 폼
-   
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/" component={Auth(Main, null)}/>
-            <Route exact path="/Login" component={Auth(Login, false)}/>
-            <Route exact path="/SignUp" component={Auth(SignUp, false)}/>
-          </Switch>
-        </div>
-      </Router>
-    );
+
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/" component={Auth(Main, null)} />
+          <Route exact path="/Login" component={Auth(Login, false)} />
+          <Route exact path="/SignUp" component={Auth(SignUp, false)} />
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
