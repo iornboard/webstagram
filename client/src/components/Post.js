@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PostCard() {
+export default function RecipeReviewCard() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -65,7 +65,7 @@ export default function PostCard() {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image="https://source.unsplash.com/random"
         title="Paella dish"
       />
       <CardContent>
@@ -122,10 +122,3 @@ export default function PostCard() {
     </Card>
   );
 }
-
-
-
-
-// const Post = ({ user }) => <Wrapper>{user.email}</Wrapper>;
-
-// export default Post;

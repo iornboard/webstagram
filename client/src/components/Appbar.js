@@ -17,6 +17,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   sp: {
@@ -206,6 +207,12 @@ export default function PrimarySearchAppBar() {
               control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
               label={auth ? 'Logout' : 'Login'}
             />
+
+            <IconButton>
+              <Button variant="contained" color="primary" href="#contained-buttons">
+                LOGIN
+              </Button>
+            </IconButton>
             <IconButton
               className={classes.sp}
               edge="end"
