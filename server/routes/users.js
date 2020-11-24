@@ -82,11 +82,11 @@ router.post('/login', (req, res) => {
       , (err, user) => {
         if(err) return res.json({ success: false, err }); //에러가 발생하면,
         console.log("로그아웃에 성공했습니다.");
-        return res.status(200).send({ // 에러가 발생하지 않는다면,
-          success: true
-        })
+        return res.status(200).json({ success: true, isAuth: false }); 
+        // return res.status(200).send({ // 에러가 발생하지 않는다면,
+        //        success: true,
+        // // })
       })
   })
 
-module.exports = router;
-  
+module.exports = router; 

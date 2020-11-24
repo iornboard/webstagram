@@ -16,6 +16,7 @@ import Reducer from './_reducers';
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore) 
 
 const theme = createMuiTheme({
+  
       typography : {
           fontFamily : '"Noto Sans KR" , serif',
 

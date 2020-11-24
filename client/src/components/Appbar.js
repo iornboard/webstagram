@@ -17,6 +17,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Button from '@material-ui/core/Button';
+import { onClickHandler } from '../routes/Main';
 
 const useStyles = makeStyles((theme) => ({
   sp: {
@@ -85,14 +87,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [auth, setAuth] = React.useState(true);
+  //const [isAuth, setisAuth] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  
+  // const handleChange = (event) => {
+  //   setisAuth(event.target.checked);
+  // };
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -171,6 +174,25 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+    function LoginButton() {
+      return (
+        <IconButton>
+          <Button variant="contained" color="primary" href="/login">
+            LOGIN
+          </Button>
+        </IconButton>
+      );
+    }
+    function LogoutButton() {
+      return (
+        <IconButton>
+          <Button variant="contained" color="primary" onclick={onClickHandler}>
+            LOGOUT
+          </Button>
+        </IconButton>
+      );
+    }
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -203,9 +225,12 @@ export default function PrimarySearchAppBar() {
           <div className={classes.sectionDesktop}>
             <FormControlLabel
               display="flex"
-              control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-              label={auth ? 'Logout' : 'Login'}
+              control={<Switch aria-label="login switch" />}
+              label={ props.isAuth ? 'Logout' : 'Login'}
             />
+            {
+              props.isAuth ? <LogoutButton/> : <LoginButton/>
+            }
             <IconButton
               className={classes.sp}
               edge="end"

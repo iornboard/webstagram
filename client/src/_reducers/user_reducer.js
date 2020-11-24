@@ -19,3 +19,4 @@ export default function(state = {}, action) { //리듀서는 이전 스테이트
             return state;
     }
 }
+

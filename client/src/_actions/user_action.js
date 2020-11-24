@@ -28,7 +28,6 @@ export function SignUpUser(dataToSubmit) {
     }
 }
 
-
 export function auth() {
     
     const request = Axios.get('/api/users/auth')

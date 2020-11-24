@@ -16,6 +16,8 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { withRouter } from 'react-router-dom';
 
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -62,27 +64,26 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+export function onClickHandler(props) {
+  Axios.get('/api/users/logout')
+    .then(response => {
+      if (response.data.success) {
+        props.history.push("/login")
+      } else {
+        alert('로그아웃 하는데 실패 했습니다.')
+      }
+    })
+}
 
 function Main(props) {
   const classes = useStyles();
 
-  const onClickHandler = () => {
-    Axios.get('/api/users/logout')
-      .then(response => {
-        if (response.data.success) {
-          props.history.push("/login")
-        } else {
-          alert('로그아웃 하는데 실패 했습니다.')
-        }
-      })
-  }
-
   return (
-    <React.Fragment>
+     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
-      </AppBar>
-      <main>
+        <AppBar position="relative">
+        
+        </AppBar>
         {/* Hero unit */}
 
         <Container className={classes.cardGrid} maxWidth="md">
@@ -95,7 +96,6 @@ function Main(props) {
             />
           </Card>
         </Container>
-      </main>
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
@@ -108,6 +108,4 @@ function Main(props) {
   );
 }
 
-export default withRouter(Main)
-
-
+export default withRouter(Main);
