@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { withRouter } from 'react-router-dom';
 import ScrollList from '../components/ScrollList';
+import TextareaAutosize from '../components/TextareaAutosize';
 
 
 function Copyright() {
@@ -32,6 +33,7 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -79,6 +81,7 @@ function Main(props) {
       })
   }
 
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -86,9 +89,9 @@ function Main(props) {
       </AppBar>
       <main>
         {/* Hero unit */}
-
         <Container className={classes.cardGrid} maxWidth="md">
-          <ScrollList/>
+          <TextareaAutosize />
+          <ScrollList />
           {/* End hero unit */}
           <Card className={classes.card}>
             <CardMedia
