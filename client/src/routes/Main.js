@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, {useState} from 'react';
 import Axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import { useDispatch } from 'react-redux';   
+import { post } from '../_actions/user_action';
+
 import { withRouter } from 'react-router-dom';
 import AppBar from '../components/Appbar';
 import ScrollList from '../components/ScrollList';
+
 
 
 function Copyright() {
@@ -71,6 +79,34 @@ function Main(props) {
       })
   }
 
+  const dispatch = useDispatch()
+  const [comment, setComment] = useState("")    
+
+
+
+  const onCommentHandler = (event) => {
+    setComment(event.currentTarget.value)
+}
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
+        
+    let body = {
+        comment: comment,
+    }
+
+
+    dispatch(post(body))
+    .then(response => {
+        if (response.payload.loginSuccess) {
+        props.history.push('/') //리액트에서 페이지를 이동 방법
+        } else {
+        alert('Error')
+        }
+    })
+  }
+
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -78,6 +114,37 @@ function Main(props) {
       </AppBar>
       <main>
         {/* Hero unit */}
+
+
+        <form onSubmit={onSubmitHandler} className={classes.form} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  type="text"
+                  id="comment"
+                  label="comment"
+                  name="comment"
+                  autoComplete="comment"
+                  value={comment}
+                  onChange = {onCommentHandler}
+                />
+              </Grid>
+            </Grid>
+            <Button 
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              comment!
+            </Button>
+
+          </form>
+
 
         <Container className={classes.cardGrid} maxWidth="md">
           <ScrollList/>
