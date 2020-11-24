@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import Axios from 'axios';
-import AppBar from '../components/Appbar';
-import TextareaAutosize from '../components/TextareaAutosize';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { withRouter } from 'react-router-dom';
+import AppBar from '../components/Appbar';
 import ScrollList from '../components/ScrollList';
 
 
@@ -81,7 +80,6 @@ function Main(props) {
         {/* Hero unit */}
 
         <Container className={classes.cardGrid} maxWidth="md">
-        <TextareaAutosize/>
           <ScrollList/>
           {/* End hero unit */}
         </Container>

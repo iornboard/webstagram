@@ -10,6 +10,7 @@ import Main from './routes/Main.js';
 import Login from './routes/Login';
 import SignUp from './routes/SignUp';
 import Potal from './routes/Potal';
+import Test from './routes/Test';
 import Auth from './hoc/auth'
 
 
@@ -39,6 +40,7 @@ function App() {
           <Route exact path="/Potal" component={Auth(Potal, null)} />
           <Route exact path="/Login" component={Auth(Login, false)} />
           <Route exact path="/SignUp" component={Auth(SignUp, false)} />
+          <Route exact path="/Test" component={Auth(Test, false)} />
         </Switch>
       </div>
     </Router>
