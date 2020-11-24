@@ -6,7 +6,7 @@ import {
   Route
 } from 'react-router-dom';
 
-import Main from './routes/Main';
+import Main from './routes/Main.js';
 import Login from './routes/Login';
 import SignUp from './routes/SignUp';
 import Potal from './routes/Potal';

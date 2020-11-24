@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Axios from 'axios';
 import AppBar from '../components/Appbar';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
+import TextareaAutosize from '../components/TextareaAutosize';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +9,6 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { withRouter } from 'react-router-dom';
 import ScrollList from '../components/ScrollList';
-import TextareaAutosize from '../components/TextareaAutosize';
 
 
 function Copyright() {
@@ -27,7 +25,6 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -75,7 +72,6 @@ function Main(props) {
       })
   }
 
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -83,21 +79,11 @@ function Main(props) {
       </AppBar>
       <main>
         {/* Hero unit */}
+
         <Container className={classes.cardGrid} maxWidth="md">
-<<<<<<< HEAD
+        <TextareaAutosize/>
           <ScrollList/>
-=======
-          <TextareaAutosize />
-          <ScrollList />
           {/* End hero unit */}
-          <Card className={classes.card}>
-            <CardMedia
-              className={classes.cardMedia}
-              image="https://source.unsplash.com/random"
-              title="Image title"
-            />
-          </Card>
->>>>>>> 00c5713b7fb1300088ca550a58eef67239c7dbee
         </Container>
       </main>
       {/* Footer */}
