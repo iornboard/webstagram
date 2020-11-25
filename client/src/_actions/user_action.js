@@ -3,7 +3,8 @@ import Axios from 'axios'
 import {
     LOGIN_USER,
     SIGNUP_USER,
-    AUTH_USER
+    AUTH_USER,
+    POST
 } from './types';
 
 export function loginUser(dataToSubmit) {
@@ -38,5 +39,15 @@ export function auth() {
         payload: request
     }
 }
+ 
 
+export function post(dataToSubmit) {
+    
+    const request = Axios.post('/api/post', dataToSubmit)
+        .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
+    return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
+        type: POST,
+        payload: request
+    }
+}

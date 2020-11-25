@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -6,9 +6,10 @@ import {
   Route
 } from 'react-router-dom';
 
-import Main from './routes/Main';
+import Main from './routes/Main.js';
 import Login from './routes/Login';
 import SignUp from './routes/SignUp';
+import Potal from './routes/Potal';
 import Auth from './hoc/auth'
 
 
@@ -35,6 +36,7 @@ function App() {
       <div>
         <Switch>
           <Route exact path="/" component={Auth(Main, null)} />
+          <Route exact path="/Potal" component={Auth(Potal, null)} />
           <Route exact path="/Login" component={Auth(Login, false)} />
           <Route exact path="/SignUp" component={Auth(SignUp, false)} />
         </Switch>

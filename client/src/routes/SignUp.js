@@ -14,9 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 //import axios from 'axios'; // 전송하기 위한 모듈 //리액트 훅을 사용하고 리덕스를 사용하여 요청을 보내도록 업데이트 하였습니다.
-import { withRouter } from 'react-router-dom'; 
-import { useDispatch } from 'react-redux'; 
-import { SignUpUser } from '../_actions/user_action'; 
+import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';   
+import { SignUpUser } from '../_actions/user_action';
 
 function Copyright() {
   return (

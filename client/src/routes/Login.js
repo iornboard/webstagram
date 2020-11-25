@@ -18,6 +18,7 @@ import { loginUser } from '../_actions/user_action';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 
 function Copyright() {
@@ -84,7 +85,7 @@ function Login(props) {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
     console.log('Email', Email);
-    console.log('Password', Password);
+    console.log('Password', Password); 
 
     let body = {
       email: Email,
@@ -174,11 +175,6 @@ function Login(props) {
               <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
                 </Grid>
               </Grid>
             </form>

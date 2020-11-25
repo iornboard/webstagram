@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -87,15 +89,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar(props) {
+function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  //const [isAuth, setisAuth] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   
-  // const handleChange = (event) => {
-  //   setisAuth(event.target.checked);
-  // };
+  
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -174,6 +173,16 @@ export default function PrimarySearchAppBar(props) {
     </Menu>
   );
 
+  const onClickHandler = () => {
+    Axios.get('/api/users/logout')
+      .then(response => {
+        if (response.data.success) {
+          props.history.push("/login")
+        } else {
+          alert('로그아웃 하는데 실패 했습니다.')
+        }
+      })
+  }
     function LoginButton() {
       return (
         <IconButton>
@@ -185,8 +194,8 @@ export default function PrimarySearchAppBar(props) {
     }
     function LogoutButton() {
       return (
-        <IconButton>
-          <Button variant="contained" color="primary" onclick={onClickHandler}>
+        <IconButton onClick={onClickHandler}>
+          <Button variant="contained" color="primary" >
             LOGOUT
           </Button>
         </IconButton>
@@ -226,11 +235,9 @@ export default function PrimarySearchAppBar(props) {
             <FormControlLabel
               display="flex"
               control={<Switch aria-label="login switch" />}
-              label={ props.isAuth ? 'Logout' : 'Login'}
-            />
-            {
-              props.isAuth ? <LogoutButton/> : <LoginButton/>
-            }
+              
+            />     
+            <LogoutButton/> 
             <IconButton
               className={classes.sp}
               edge="end"
@@ -263,3 +270,5 @@ export default function PrimarySearchAppBar(props) {
     </div>
   );
 }
+
+export default withRouter(PrimarySearchAppBar);

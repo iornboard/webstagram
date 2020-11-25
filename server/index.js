@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
 const userRouter = require('./routes/users');
+const postRouter = require('./routes/posts');
 
 // 데이터베이스 설정
 const mongoose = require('mongoose');
@@ -52,6 +53,7 @@ app.get('/api/customers' , async  (req, res, next) => {
 });
 
 app.use('/api/users', userRouter);
+app.use('/api/posts', postRouter);
 
 app.use((req, res, next) => {
   next('Not found error!')
