@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 // const dotenv = require('dotenv');
 const { auth } = require('./middleware/auth') //미들웨어 역할을 하는 모듈을 직접 만들어 임포트한다.
-const { User } = require('./models/User');
+const { Post } = require('./models/Post');
 
 //application/json
 app.use(bodyParser.json());
@@ -36,21 +36,6 @@ app.get('/', (req, res) => {
 
 // 클라이언트 -> 서버 -> 데이터 베이스
 
-app.post('/api/customers', async  (req, res, next) => {
-     await Post.create({  
-      name: req.body.name,  
-      birthday: req.body.birthday, 
-      Num: 1,
-      image : 'https://placeimg.com/64/64/any'
-    });
-})
-
-// 데이터 베이스 -> 서버 -> 클라이언트
-
-app.get('/api/customers' , async  (req, res, next) => {
-    const post = await Post.findAll();
-    res.send(post);
-});
 
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
@@ -58,6 +43,7 @@ app.use('/api/posts', postRouter);
 app.use((req, res, next) => {
   next('Not found error!')
 });
+
 
 app.use((err, req, res, next) => {
   console.error(err);
@@ -70,3 +56,22 @@ app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중');
 });
 
+
+
+ 
+
+// app.post('/api/customers', async  (req, res, next) => {
+//   await Post.create({  
+//    name: req.body.name,  
+//    birthday: req.body.birthday, 
+//    Num: 1,
+//    image : 'https://placeimg.com/64/64/any'
+//  });
+// })
+
+// // 데이터 베이스 -> 서버 -> 클라이언트
+
+// app.get('/api/customers' , async  (req, res, next) => {
+//  const post = await Post.findAll();
+//  res.send(post);
+// });

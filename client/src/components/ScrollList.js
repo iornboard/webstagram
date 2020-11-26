@@ -2,31 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Post from './Post';
 import { Content, Loading } from './ScrollList.styles';
 import { getUsers } from '../API';
-import { makeStyles } from '@material-ui/core/styles';
-
-
-// const useStyles = makeStyles(theme => ({
-//   paper: {
-//     marginTop: theme.spacing(8),
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   },
-// }));
-
 
 function ScrollList()  {
-
 
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+
 
   const handleScroll = (event) => {
     const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
 
     if (scrollHeight - scrollTop === clientHeight) {
       setPage(prev => prev + 1);
+      callApi();
     }
   };
 
@@ -42,6 +31,16 @@ function ScrollList()  {
   }, [page]);
 
   //const classes  =  useStyles();
+
+
+
+  const callApi = async () => {
+    const response = await fetch('/api/posts/get');
+    const body = await response.json();
+    console.log(body);
+    return body;
+  }
+
 
   return (
     <div className='ScrollList'>

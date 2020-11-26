@@ -1,14 +1,17 @@
 import React from 'react';
 import { Wrapper } from './User.styles';
-import Pid from '../components/PidTest';
+import { makeStyles } from '@material-ui/core/styles';
 
 
+const useStyles = makeStyles((theme) => ({
+    icon: {
+      marginRight: theme.spacing(2),
+    },
+  }));
 
 const User = ({ user }) => 
 <Wrapper>
-<Pid>
 {user.email}
-</Pid>
 </Wrapper>;
 
 export default User;

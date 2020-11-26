@@ -3,8 +3,7 @@ const router = express.Router();
 
 const { Post } = require('../models/Post');
 
-
-  router.post('/', (req, res) => {
+  router.post('/create', (req, res) => {
       
     //정보들을 client에서 가져오면 
     //그것들을 데이터 베이스에 넣어준다.
@@ -19,5 +18,12 @@ const { Post } = require('../models/Post');
         })
     })
   })
+
+
+  router.get('/get' , async  (req, res, next) => {
+    const comment = Post.find({});
+    res.json(comment);
+   });
+   
 
   module.exports = router ;
