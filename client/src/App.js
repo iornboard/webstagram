@@ -13,6 +13,9 @@ import Potal from './routes/Potal';
 import Auth from './hoc/auth'
 
 
+
+
+
 // https://placeimg.com/64/64/any >> 아무 이미지나 가져와서 쓸 수 있음
 // 리엑트에는 key 값이 필요함, 그래서 아무 키가 될 수 있는 것을 사용할 것
 // callApi 랑 마운트 부분은 공부가 좀 더 필요할 듯

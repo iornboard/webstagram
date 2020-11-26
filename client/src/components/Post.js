@@ -1,13 +1,24 @@
 import React from 'react';
-import { Wrapper } from './User.styles';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: white;
+  height: 100px;
+  margin: 10px;
+  border-radius: 10px;
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+`;
 
 
-const useStyles = makeStyles((theme) => ({
-    icon: {
-      marginRight: theme.spacing(2),
-    },
-  }));
+
 
 const User = ({ comment }) => 
 <Wrapper>
