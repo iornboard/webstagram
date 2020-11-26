@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   font-weight: 500;
   color: white;
-  height: 500px;
+  height: 100px;
   margin: 10px;
   border-radius: 10px;
   background: radial-gradient(

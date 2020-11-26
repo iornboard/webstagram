@@ -9,9 +9,9 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const User = ({ user }) => 
+const User = ({ comment }) => 
 <Wrapper>
-{user.email}
+{comment.comment}
 </Wrapper>;
 
 export default User;

@@ -21,8 +21,8 @@ const { Post } = require('../models/Post');
 
 
   router.get('/get' , async  (req, res, next) => {
-    const comment = Post.find({});
-    res.json(comment);
+    const comment = await Post.find({});
+    res.send(comment);
    });
    
 

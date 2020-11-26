@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Post from './Post';
 import { Content, Loading } from './ScrollList.styles';
-import { getUsers } from '../API';
+
 
 function ScrollList()  {
 
   const [page, setPage] = useState(1);
-  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [comments, setComment] = useState([]);
 
 
   const handleScroll = (event) => {
@@ -15,37 +15,33 @@ function ScrollList()  {
 
     if (scrollHeight - scrollTop === clientHeight) {
       setPage(prev => prev + 1);
-      callApi();
     }
+
   };
 
   useEffect(() => {
     const loadUsers = async () => {
       setLoading(true);
-      const newUsers = await getUsers(page);
-      setUsers((prev) => [...prev, ...newUsers]);
+      callApi().then(res => setComment(res));
       setLoading(false);
-    };
 
+    };
+   
     loadUsers();
   }, [page]);
-
-  //const classes  =  useStyles();
-
 
 
   const callApi = async () => {
     const response = await fetch('/api/posts/get');
-    const body = await response.json();
-    console.log(body);
-    return body;
+    const post = await response.json();
+    console.log(post);
+    return post;
   }
-
 
   return (
     <div className='ScrollList'>
       <Content onScroll={handleScroll}>
-        { users.map((user) => <Post key={user.cell} user={user} />)}
+      { comments ?  comments.map((comment) => <Post key={comment._id} comment={comment} />).reverse() : loading && <Loading>Loading ...</Loading> }
       </Content>
       {loading && <Loading>Loading ...</Loading>}
     </div>
