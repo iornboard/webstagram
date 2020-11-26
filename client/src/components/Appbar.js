@@ -21,6 +21,29 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import { onClickHandler } from '../routes/Main';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#9C2ED8',
+      dark: '#F90000'
+    },
+    secondary: {
+      main: '#4F1A6B'
+    },
+    error: {
+      main: '#009688'
+    },
+    text: {
+      primary: '#e91e63',
+      secondary: '#2196f3',
+      disabled: '#4caf50',
+      hint: '#ffc107',
+      myTextColor: '#039be5'
+    }
+  },
+})
 
 const useStyles = makeStyles((theme) => ({
   sp: {
@@ -93,8 +116,8 @@ function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  
-  
+
+
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -143,22 +166,6 @@ function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -183,91 +190,92 @@ function PrimarySearchAppBar(props) {
         }
       })
   }
-    function LoginButton() {
-      return (
-        <IconButton>
-          <Button variant="contained" color="primary" href="/login">
-            LOGIN
+  function LoginButton() {
+    return (
+      <IconButton>
+        <Button variant="contained" color="primary" href="/login">
+          LOGIN
           </Button>
-        </IconButton>
-      );
-    }
-    function LogoutButton() {
-      return (
-        <IconButton onClick={onClickHandler}>
-          <Button variant="contained" color="primary" >
-            LOGOUT
+      </IconButton>
+    );
+  }
+  function LogoutButton() {
+    return (
+      <IconButton onClick={onClickHandler}>
+        <Button variant="contained" color="secondary" >
+          LOGOUT
           </Button>
-        </IconButton>
-      );
-    }
-
+      </IconButton>
+    );
+  }
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <CameraAltIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            webstagram
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+    <ThemeProvider theme={theme} style={{ padding: '20px' }}>
+      <div className={classes.grow}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+            >
+              <CameraAltIcon />
+            </IconButton>
+            <Typography className={classes.title} variant="h6" noWrap>
+              webstagram
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="검색"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </div>
-            <InputBase
-              placeholder="검색"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <FormControlLabel
-              display="flex"
-              control={<Switch aria-label="login switch" />}
-              
-            />     
-            <LogoutButton/> 
-            <IconButton
-              className={classes.sp}
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <FormControlLabel
+                display="flex"
+                control={<Switch aria-label="login switch" />}
 
-          </div>
+              />
+              <LogoutButton />
+              <IconButton
+                className={classes.sp}
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
 
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </div>
+            </div>
+
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </div>
+    </ThemeProvider>
   );
 }
 
