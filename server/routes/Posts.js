@@ -21,7 +21,7 @@ const { Post } = require('../models/Post');
 
 
   router.get('/get' , async  (req, res, next) => {
-    const comment = await Post.find({});
+    const comment = await Post.find().sort({'_id': -1});
     res.send(comment);
    });
    

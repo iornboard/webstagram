@@ -32,39 +32,40 @@ function ScrollList(props)  {
 
   const dispatch = useDispatch()
   const [comment, setComment] = useState("")    
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
+  const [commentNum, setCommentNum] = useState(7);
+
 
 
 //------------------------------무한 스크롤------------------------------------- 
-
-  const handleScroll = (event) => {
-    const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
-
-    if (scrollHeight - scrollTop === clientHeight) {
-      setPage(prev => prev + 1);
-    }
-
-  };
 
   useEffect(() => {
     const loadUsers = async () => {
       setLoading(true);
       callApi().then(res => setComments(res));
       setLoading(false);
-
     };
    
     loadUsers();
-  }, [page]);
+  }, 1);
+
+
+  const handleScroll = (event) => {
+    const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+
+    if (scrollHeight - scrollTop === clientHeight) {
+      callApi().then(res => setComments(res));
+      setCommentNum(prev => prev +5);
+    }
+
+  };
 
 
   const callApi = async () => {
     const response = await fetch('/api/posts/get');
     const post = await response.json();
-    console.log(post);
-    return post;
+    return post.filter((c , index) => index < commentNum);
   }
 
 //---------------------------- summit 부분 --------------------------------------
@@ -89,6 +90,7 @@ function ScrollList(props)  {
         if (response.payload.loginSuccess) {
         props.history.push('/') //리액트에서 페이지를 이동 방법
         } else {
+        
         callApi().then(res => setComments(res));
         setComment("");
         }
@@ -125,7 +127,7 @@ function ScrollList(props)  {
 
 
         <Content onScroll={handleScroll} >
-        { comments ?  comments.map((comment) => <Post key={comment._id} comment={comment} />).reverse() : loading && <Loading>Loading ...</Loading> }
+        { comments ?  comments.map((comment) => <Post key={comment._id} comment={comment} />) : loading && <Loading>Loading ...</Loading> }
         </Content>
 
 
