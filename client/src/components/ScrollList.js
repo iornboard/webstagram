@@ -8,15 +8,13 @@ import { post } from '../_actions/user_action';
 import styled from 'styled-components';
 
 
-
-
 export const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  width: 800px;
+  width: 400px;
   height: 800px;
   margin: 0 auto;
   overflow: auto;
+  float: right;
 `;
 
 export const Loading = styled.div`
@@ -125,11 +123,11 @@ function ScrollList(props)  {
               type="submit" fullWidth variant="contained" color="primary"> comment! </Button>
           </form>
 
-
-        <Content onScroll={handleScroll} >
-        { comments ?  comments.map((comment) => <Post key={comment._id} comment={comment} />) : loading && <Loading>Loading ...</Loading> }
-        </Content>
-
+        <Grid alignItems = 'baseline'>
+          <Content onScroll={handleScroll} >
+          { comments ?  comments.map((comment) => <Post key={comment._id} comment={comment} />) : loading && <Loading>Loading ...</Loading> }
+          </Content>
+        </Grid>
 
       {loading && <Loading>Loading ...</Loading>}
     </div>

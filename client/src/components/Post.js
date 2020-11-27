@@ -1,28 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
-
-export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  color: white;
-  height: 100px;
-  margin: 10px;
-  border-radius: 10px;
-  background: radial-gradient(
-    circle,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
-`;
-
-
-
+import PostCard from './PostCard';
+import { CardContent } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 
 const User = ({ comment }) => 
-<Wrapper>
-{comment.comment}
-</Wrapper>;
+
+<Container paddingTop = 'spacing(8)' paddingBottom = 'spacing(8)' maxWidth="md">
+  <CardContent display = 'flex' flexDirection = 'column'>
+    <PostCard text = {comment.comment} />
+  </CardContent>
+</Container>
 
 export default User;
+
+
+
+
+
+
+
