@@ -33,6 +33,7 @@ mongoose.connect('mongodb+srv://thswlsqls:test1234mongodb@cluster0.ha0bc.mongodb
   .catch(err => console.log(err))
 
 
+
 //기타 미들웨어 설정
 app.use(morgan('dev'));  // 로그 표현 방식중에 dev를 사용한다.
 app.use(express.static(path.join(__dirname, 'public')));  // ()안의 폴더 내용의 이름을 합친다. (__dirname == 폴더 위치) 

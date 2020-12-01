@@ -55,7 +55,6 @@ function ScrollList(props)  {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [userID, setUserID] = useState("");    ///임시임!!
   const [comment, setComment] = useState("");    
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
@@ -80,7 +79,6 @@ function ScrollList(props)  {
   useEffect(() => {
     const loadUsers = async () => {
       setLoading(true);
-      setUserID(props.user);  ///임시임!!
       callApi().then(res => setPosts(res));
       setLoading(false);
     };
@@ -119,7 +117,7 @@ function ScrollList(props)  {
         
     let body = {
         comment: comment,
-        name: userID,  ///임시임!!
+        name: props.user,  ///임시임!!
     }
     
 
