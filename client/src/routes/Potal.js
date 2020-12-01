@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Axios from 'axios';
-import AppBar from '../components/Appbar';
+import AppBar2 from '../components/Appbar2';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -75,8 +75,8 @@ function Potal(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
-      </AppBar>
+      <AppBar2 position="relative">
+      </AppBar2>
       <main>
         {/* Hero unit */}
 
