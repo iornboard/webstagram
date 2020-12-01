@@ -16,29 +16,9 @@ import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#9C2ED8',
-      dark: '#F90000'
-    },
-    secondary: {
-      main: '#4F1A6B'
-    },
-    error: {
-      main: '#009688'
-    },
-    text: {
-      primary: '#e91e63',
-      secondary: '#2196f3',
-      disabled: '#4caf50',
-      hint: '#ffc107',
-      myTextColor: '#039be5'
-    }
-  },
-})
+
+
 
 const useStyles = makeStyles((theme) => ({
   sp: {
@@ -206,7 +186,6 @@ function PrimarySearchAppBar(props) {
     );
   }
   return (
-    <ThemeProvider theme={theme} style={{ padding: '20px' }}>
       <div className={classes.grow}>
         <AppBar position="static">
           <Toolbar>
@@ -272,7 +251,6 @@ function PrimarySearchAppBar(props) {
         {renderMobileMenu}
         {renderMenu}
       </div>
-    </ThemeProvider>
   );
 }
 

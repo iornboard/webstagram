@@ -61,8 +61,7 @@ router.post('/login', (req, res) => {
     //여기까지 미들웨어를 통과해 왔다는 이야기는 Authentication이 true라는 말이다.
     res.status(200).json({
       _id: req.user._id, //auth미들웨어에서 user정보를 req.user에 저장하였기 때문에 이와 같이 _id값을 가져올 수 있다.
-      isAdmin: req.user.role === 0 ? false : true,
-       //role 0 -> 일반유저 role 0이 아니면 관리자이다.
+      isAdmin: req.user.role === 0 ? false : true, //role 0 -> 일반유저 role 0이 아니면 관리자이다.
       isAuth: true,
       email: req.user.email,
       name: req.user.name,

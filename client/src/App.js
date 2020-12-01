@@ -11,9 +11,31 @@ import Login from './routes/Login';
 import SignUp from './routes/SignUp';
 import Potal from './routes/Potal';
 import Auth from './hoc/auth'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 
-
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#9C2ED8',
+      light :'#f44336',
+      dark: '#4aedc4'
+    },
+    secondary: {
+      main: '#4F1A6B'
+    },
+    error: {
+      main: '#009688'
+    },
+    text: {
+      primary: '#e91e63',
+      secondary: '#2196f3',
+      disabled: '#4caf50',
+      hint: '#ffc107',
+      myTextColor: '#039be5'
+    }
+  },
+})
 
 
 // https://placeimg.com/64/64/any >> 아무 이미지나 가져와서 쓸 수 있음
@@ -37,12 +59,14 @@ function App() {
   return (
     <Router>
       <div>
-        <Switch>
-          <Route exact path="/" component={Auth(Main, true)} />
-          <Route exact path="/Potal" component={Auth(Potal, false)} />
-          <Route exact path="/Login" component={Auth(Login, false)} />
-          <Route exact path="/SignUp" component={Auth(SignUp, false)} />
-        </Switch>
+        <ThemeProvider theme={theme} style={{ padding: '20px' }}>
+          <Switch>
+            <Route exact path="/" component={Auth(Main, true)} />
+            <Route exact path="/Potal" component={Auth(Potal, false)} />
+            <Route exact path="/Login" component={Auth(Login, false)} />
+            <Route exact path="/SignUp" component={Auth(SignUp, false)} />
+          </Switch>
+        </ThemeProvider>
       </div>
     </Router>
   );
