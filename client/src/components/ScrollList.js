@@ -143,7 +143,7 @@ function ScrollList(props)  {
       <Dialog/>
 
         <Grid alignItems = 'baseline'>
-          <Button variant="outlined" fullWidth  color="primary" variant="contained" className={classes.margin} onClick={handleClickOpen}>
+          <Button variant="outlined" fullWidth  color="primary" variant="contained" className={classes.margin} onClick={handleClickOpen} >
           입력해주세요
           </Button>
           
