@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { OmitProps } from 'antd/lib/transfer/ListBody';
 
 
 
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function RecipeReviewCard( {text} ) {
+export default function RecipeReviewCard( props ) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -68,7 +69,7 @@ export default function RecipeReviewCard( {text} ) {
             <MoreVertIcon />
           </IconButton>
         }
-        title= {text}
+        title= {props.name}
         subheader="September 14, 2016"
       />
       <CardMedia
@@ -78,7 +79,7 @@ export default function RecipeReviewCard( {text} ) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-            {text}
+           {props.text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

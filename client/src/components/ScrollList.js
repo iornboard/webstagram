@@ -53,12 +53,12 @@ export const Loading = styled.div`
 function ScrollList(props) {
 
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-  const [comment, setComment] = useState("")
+  const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState([]);
-  const [commentNum, setCommentNum] = useState(3);
+  const [posts, setPosts] = useState([]);
+  const [postNum, setPostNum] = useState(3);
   const [open, setOpen] = React.useState(false);
 
   //------------------------------다이얼로그------------------------------------- 
@@ -79,7 +79,7 @@ function ScrollList(props) {
   useEffect(() => {
     const loadUsers = async () => {
       setLoading(true);
-      callApi().then(res => setComments(res));
+      callApi().then(res => setPosts(res));
       setLoading(false);
     };
 
@@ -91,8 +91,8 @@ function ScrollList(props) {
     const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
 
     if (scrollHeight - scrollTop === clientHeight) {
-      callApi().then(res => setComments(res));
-      setCommentNum(prev => prev + 3);
+      callApi().then(res => setPosts(res));
+      setPostNum(prev => prev + 3);
     }
 
   };
@@ -101,7 +101,7 @@ function ScrollList(props) {
   const callApi = async () => {
     const response = await fetch('/api/posts/get');
     const post = await response.json();
-    return post.filter((c, index) => index < commentNum);
+    return post.filter((c, index) => index < postNum);
   }
 
   //---------------------------- summit 부분 --------------------------------------
@@ -117,6 +117,7 @@ function ScrollList(props) {
 
     let body = {
       comment: comment,
+      name: props.user,  ///임시임!!
     }
 
 
@@ -126,7 +127,7 @@ function ScrollList(props) {
           props.history.push('/') //리액트에서 페이지를 이동 방법
         } else {
 
-          callApi().then(res => setComments(res));
+          callApi().then(res => setPosts(res));
           setComment("");
         }
       })
@@ -143,12 +144,12 @@ function ScrollList(props) {
       <Dialog />
 
       <Grid alignItems='baseline'>
-        <Button variant="outlined" fullWidth color="primary" variant="contained" className={classes.margin} onClick={handleClickOpen}>
+        <Button variant="outlined" fullWidth color="primary" variant="contained" className={classes.margin} onClick={handleClickOpen} >
           입력해주세요
           </Button>
 
         <Content onScroll={handleScroll} >
-          {comments ? comments.map((comment) => <Post key={comment._id} comment={comment} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
+          {posts ? posts.map((pos) => <Post key={pos._id} post={pos} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
         </Content>
       </Grid>
 
