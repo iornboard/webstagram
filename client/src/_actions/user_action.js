@@ -9,7 +9,7 @@ import {
 
 export function loginUser(dataToSubmit) {
     
-    const request = Axios.post('/api/users/login', dataToSubmit) //입력받은 데이터를 인자로 갖고 서버로 요청을 보낸다.
+    const request = Axios.post('/api/auth/login', dataToSubmit) //입력받은 데이터를 인자로 갖고 서버로 요청을 보낸다.
         .then(response => response.data ) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
@@ -20,7 +20,7 @@ export function loginUser(dataToSubmit) {
 
 export function SignUpUser(dataToSubmit) {
     
-    const request = Axios.post('/api/users/signup', dataToSubmit)
+    const request = Axios.post('/api/auth/signup', dataToSubmit)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과, 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
@@ -31,7 +31,7 @@ export function SignUpUser(dataToSubmit) {
 
 export function auth() {
     
-    const request = Axios.get('/api/users/auth')
+    const request = Axios.get('/api/auth/auth')
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.

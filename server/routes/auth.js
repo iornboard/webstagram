@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router();
 
 const { auth } = require('../middleware/auth') //미들웨어 역할을 하는 모듈을 직접 만들어 임포트한다.
-const { User } = require('../models/User');
+const { User } = require('../models/Users');
+
 
 router.post('/login', (req, res) => {
-
     console.log(req.body)
     //요청된 이메일을 데이터베이스에서 있는지 찾는다.
     User.findOne({ email: req.body.email }, (err, user) => {
