@@ -38,8 +38,8 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/" component={Auth(Main, null)} />
-          <Route exact path="/Potal" component={Auth(Potal, null)} />
+          <Route exact path="/" component={Auth(Main, true)} />
+          <Route exact path="/Potal" component={Auth(Potal, false)} />
           <Route exact path="/Login" component={Auth(Login, false)} />
           <Route exact path="/SignUp" component={Auth(SignUp, false)} />
         </Switch>

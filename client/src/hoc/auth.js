@@ -1,3 +1,6 @@
+// 여기는 각 페이지 마다, 로그인 상태인지를 확인하고 접근권한을 클라이언트에서 부여하는 곳
+// App 페이지에서 null,true,false 상태 아무거나 하나를 부여하면 된다.
+
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth } from '../_actions/user_action';
@@ -20,7 +23,7 @@ export default function (SpecificComponent, option, adminRoute = null){
             //로그인 하지 않은 상태
             if(!response.payload.isAuth) {
                 if(option){
-                    props.history.push('/login')
+                    props.history.push('/potal')
                 }
             } else {
                 //로그인 한 상태
