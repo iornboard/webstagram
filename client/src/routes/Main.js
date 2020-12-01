@@ -1,4 +1,4 @@
-import React, {useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -78,25 +78,25 @@ function Main(props) {
 
 
   // 시작과 동시에 쿠키에서 유저 이메일을 가져온다.
-  useEffect(async() => {
+  useEffect(async () => {
     const response = await fetch('/api/auth/auth');
     const auth = await response.json();
     setUserEmail(auth.email); // 임시임
-  },[]);
+  }, []);
 
 
   return (
-     <React.Fragment>
+    <React.Fragment>
       <CssBaseline />
-        <AppBar position="relative">
-        </AppBar>
+      <AppBar position="relative">
+      </AppBar>
         사용자 : {userEmail} // 임시임
-        <ScrollList user = {userEmail} /> // 임시임
-        {/* Hero unit */}
-        <Container className={classes.cardGrid} maxWidth="md">
-      
+      <ScrollList user={userEmail} /> // 임시임
+      {/* Hero unit */}
+      <Container className={classes.cardGrid} maxWidth="md">
+
         {/* End hero unit */}
-        </Container>
+      </Container>
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
