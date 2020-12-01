@@ -198,10 +198,6 @@ function SignUp(props) { // 리액트 훅을 사용하기 위해 함수형으로
                 value={Password}
                 onChange={onPasswordHandler}
               />
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
 
               <Button
                 type="submit"

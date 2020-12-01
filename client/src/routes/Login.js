@@ -151,11 +151,6 @@ function Login(props) {
                 value={Password}
                 onChange={onPasswordHandler}
               />
-              <FormControlLabel
-                color="textSecondary"
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
 
               <Button
                 type="submit"

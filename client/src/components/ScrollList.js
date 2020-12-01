@@ -116,13 +116,8 @@ function ScrollList(props) {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
     let body = {
-<<<<<<< HEAD
-        comment: comment,
-        name: " 이메일  : " + props.user + " 님",  ///임시임!!
-=======
       comment: comment,
-      name: props.user,  ///임시임!!
->>>>>>> 2984b2ac64bac6e596a5d5ca7bd2fb46dd963714
+      name: " 이메일  : " + props.user + " 님",  ///임시임!!
     }
 
 
