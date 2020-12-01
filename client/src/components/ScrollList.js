@@ -3,7 +3,7 @@ import Post from './Post';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';   
+import { useDispatch } from 'react-redux';
 import { post } from '../_actions/user_action';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
@@ -50,18 +50,18 @@ export const Loading = styled.div`
 
 
 
-function ScrollList(props)  {
+function ScrollList(props) {
 
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [comment, setComment] = useState("");    
+  const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [postNum, setPostNum] = useState(3);
   const [open, setOpen] = React.useState(false);
 
-//------------------------------다이얼로그------------------------------------- 
+  //------------------------------다이얼로그------------------------------------- 
 
 
   const handleClickOpen = () => {
@@ -74,7 +74,7 @@ function ScrollList(props)  {
 
 
 
-//------------------------------무한 스크롤------------------------------------- 
+  //------------------------------무한 스크롤------------------------------------- 
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -82,7 +82,7 @@ function ScrollList(props)  {
       callApi().then(res => setPosts(res));
       setLoading(false);
     };
-   
+
     loadUsers();
   }, 1);
 
@@ -101,57 +101,62 @@ function ScrollList(props)  {
   const callApi = async () => {
     const response = await fetch('/api/posts/get');
     const post = await response.json();
-    return post.filter((c , index) => index < postNum);
+    return post.filter((c, index) => index < postNum);
   }
 
-//---------------------------- summit 부분 --------------------------------------
+  //---------------------------- summit 부분 --------------------------------------
 
 
   const onCommentHandler = (event) => {
     setComment(event.currentTarget.value)
-}
+  }
 
 
   const onSubmitHandler = (event) => {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
-        
+
     let body = {
+<<<<<<< HEAD
         comment: comment,
         name: " 이메일  : " + props.user + " 님",  ///임시임!!
+=======
+      comment: comment,
+      name: props.user,  ///임시임!!
+>>>>>>> 2984b2ac64bac6e596a5d5ca7bd2fb46dd963714
     }
-    
+
 
     dispatch(post(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-    .then(response => {
+      .then(response => {
         if (response.payload.loginSuccess) {
-        props.history.push('/') //리액트에서 페이지를 이동 방법
+          props.history.push('/') //리액트에서 페이지를 이동 방법
         } else {
-        
-        callApi().then(res => setPosts(res));
-        setComment("");
+
+          callApi().then(res => setPosts(res));
+          setComment("");
         }
-    })
+      })
 
     setOpen(false);
   }
 
 
-//------------------------------------------------------------------------
+  //------------------------------------------------------------------------
 
   return (
 
     <div className='ScrollList'>
-      <Dialog/>
+      <Dialog />
 
-        <Grid alignItems = 'baseline'>
-          <Button variant="outlined" fullWidth  color="primary" variant="contained" className={classes.margin} onClick={handleClickOpen} >
+      <Grid alignItems='baseline'>
+        <Button variant="outlined" fullWidth color="primary" variant="contained" className={classes.margin} onClick={handleClickOpen} >
           입력해주세요
           </Button>
-          
-          <Content onScroll={handleScroll} >       
-          { posts ?  posts.map((pos) => <Post key={pos._id} post={pos} className={classes.margin} />) : loading && <Loading>Loading ...</Loading> }
-          </Content>
-        </Grid>
+
+        <Content onScroll={handleScroll} >
+          {posts ? posts.map((pos) => <Post key={pos._id} post={pos} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
+        </Content>
+      </Grid>
 
       {loading && <Loading>Loading ...</Loading>}
 
@@ -168,31 +173,31 @@ function ScrollList(props)  {
         <form noValidate>
 
           <DialogContent>
-              <Typography component="div" variant="h5" className={classes.margin}>
-                <Box textAlign="center" m={1}>
-                  글자를 입력해주세요
+            <Typography component="div" variant="h5" className={classes.margin}>
+              <Box textAlign="center" m={1}>
+                글자를 입력해주세요
                 </Box>
-              </Typography>
-                  <Grid container spacing={2}>
-                      <Grid item xs={15}>
-                        <TextField 
-                          variant="outlined"
-                          required
-                          fullWidth
-                          type="text"
-                          id="comment"
-                          label="comment"
-                          name="comment"
-                          autoComplete="comment"
-                          value={comment}
-                          onChange = {onCommentHandler}
-                          className={classes.margin}/>
-                      </Grid>
-                  </Grid>
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={15}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  type="text"
+                  id="comment"
+                  label="comment"
+                  name="comment"
+                  autoComplete="comment"
+                  value={comment}
+                  onChange={onCommentHandler}
+                  className={classes.margin} />
+              </Grid>
+            </Grid>
           </DialogContent>
-          
+
           <DialogActions>
-            <Button type = "submit" onClick= {onSubmitHandler}  color="primary">
+            <Button type="submit" onClick={onSubmitHandler} color="primary">
               입력
             </Button>
             <Button onClick={handleClose} color="primary">
@@ -201,10 +206,10 @@ function ScrollList(props)  {
           </DialogActions>
         </form>
       </Dialog>
-      
+
 
     </div>
-    
+
   );
 }
 

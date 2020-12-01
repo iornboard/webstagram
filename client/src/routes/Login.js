@@ -36,15 +36,18 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
+    backgroundColor: '#DFC4ED'
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    height: '100vh',
+    //backgroundImage: 'url(https://source.unsplash.com/random)',
     opacity: 0.9,
     backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundColor: '#EAD8ED',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    width: '73%',
+    margin: '0 auto'
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -79,12 +82,12 @@ function Login(props) {
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value)
   }
-  
+
   const onSubmitHandler = (event) => {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
     console.log('Email', Email);
-    console.log('Password', Password); 
+    console.log('Password', Password);
 
     let body = {
       email: Email,
@@ -149,6 +152,7 @@ function Login(props) {
                 onChange={onPasswordHandler}
               />
               <FormControlLabel
+                color="textSecondary"
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
@@ -163,17 +167,17 @@ function Login(props) {
               >
                 Sign In
             </Button>
-         
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
+
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
               </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
                 </Grid>
               </Grid>
             </form>
