@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect } from 'react';
 import Axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-
 import { withRouter } from 'react-router-dom';
 import AppBar from '../components/Appbar';
 import ScrollList from '../components/ScrollList';
-import { set } from 'mongoose';
+
+
 
 
 function Copyright() {
@@ -56,9 +56,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export function onClickHandler(props) {
+
+
   Axios.get('/api/users/logout')
     .then(response => {
       if (response.data.success) {
@@ -69,21 +70,28 @@ export function onClickHandler(props) {
     })
 }
 
-
-
-
-
 function Main(props) {
+
   const classes = useStyles();
 
-  
-  
+  const [userEmail, setUserEmail] = useState("");  // 임시임
+
+
+  // 시작과 동시에 쿠키에서 유저 이메일을 가져온다.
+  useEffect(async() => {
+    const response = await fetch('/api/auth/auth');
+    const auth = await response.json();
+    setUserEmail(auth.email); // 임시임
+  },[]);
+
+
   return (
      <React.Fragment>
       <CssBaseline />
         <AppBar position="relative">
         </AppBar>
-        <ScrollList/>
+        사용자 : {userEmail} // 임시임
+        <ScrollList user = {userEmail} /> // 임시임
         {/* Hero unit */}
         <Container className={classes.cardGrid} maxWidth="md">
       

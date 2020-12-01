@@ -3,11 +3,12 @@ import PostCard from './PostCard';
 import { CardContent } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 
-const User = ({ comment }) => 
+const User = ({ post }) => 
+
 
 <Container paddingTop = 'spacing(8)' paddingBottom = 'spacing(8)' maxWidth="md">
   <CardContent display = 'flex' flexDirection = 'column'>
-    <PostCard text = {comment.comment} />
+    <PostCard name = {post.name}  text = {post.comment} />
   </CardContent>
 </Container>
 
