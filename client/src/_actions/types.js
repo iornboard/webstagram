@@ -2,3 +2,4 @@ export const LOGIN_USER = "login_user"; //리듀서에서 다양한 요청에 �
 export const SIGNUP_USER = "signup_user";
 export const AUTH_USER = "auth_user";
 export const POST = "post";
+export const PROFILE_USER = "profile";

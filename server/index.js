@@ -3,9 +3,9 @@ const express = require('express')
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan'); // 로그
 const path = require('path');// 패스
-const session = require('express-session'); // 세션
 const dotenv = require('dotenv'); // 환경변수
 const bodyParser = require('body-parser');
+
 //const passport = require('passport');  // 패스포트
 
 
@@ -23,7 +23,7 @@ app.set('port', process.env.PORT || 5000);
 
 // 데이터베이스 설정
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://thswlsqls:test1234mongodb@cluster0.ha0bc.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://thswlsqls:test1234mongodb@cluster0.ha0bc.mongodb.net/test2?retryWrites=true&w=majority',
 {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
@@ -38,10 +38,11 @@ mongoose.connect('mongodb+srv://thswlsqls:test1234mongodb@cluster0.ha0bc.mongodb
 app.use(morgan('dev'));  // 로그 표현 방식중에 dev를 사용한다.
 app.use(express.static(path.join(__dirname, 'public')));  // ()안의 폴더 내용의 이름을 합친다. (__dirname == 폴더 위치) 
 app.use('/img', express.static(path.join(__dirname, 'uploads')));   // 기본적으로는 public 폴더를 사용하겠지만 /img 요청이 들어온다면 uploads 폴더를 사용할 것임
-app.use(bodyParser.json()); //application/json
 app.use(bodyParser.urlencoded({extended: true})); //application/X-www-form-urlencoded
+app.use(bodyParser.json()); //application/json
 app.use(cookieParser(process.env.COOKIE_SECRET));
-// 세션은 어떻게 할까....
+
+
 
 
 // app.use(passport.initialize());  // 패스포트를 초기화 해주는 미들웨어
@@ -74,3 +75,6 @@ app.use((err, req, res, next) => {
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중');
 });
+
+
+

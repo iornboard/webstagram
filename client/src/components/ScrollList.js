@@ -117,7 +117,7 @@ function ScrollList(props) {
 
     let body = {
       content: content,
-      name: " 이메일  : " + props.user + " 님",  ///임시임!!
+      //name: " 이메일  : " + props.user + " 님",  ///임시임!!
     }
 
 

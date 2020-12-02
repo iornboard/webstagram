@@ -74,24 +74,24 @@ function Main(props) {
 
   const classes = useStyles();
 
-  const [userEmail, setUserEmail] = useState("");  // 임시임
+  const [userID, setUserID] = useState("");  // 임시임(4)
 
 
   // 시작과 동시에 쿠키에서 유저 이메일을 가져온다.
   useEffect(async () => {
     const response = await fetch('/api/auth/auth');
     const auth = await response.json();
-    setUserEmail(auth.email); // 임시임
+    setUserID(auth._id); 
   }, []);
 
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
+      <AppBar position="relative" userID ={userID} >
       </AppBar>
-        사용자 : {userEmail} // 임시임
-      <ScrollList user={userEmail} /> // 임시임
+        사용자 : {userID} // 임시임
+      <ScrollList userID ={userID} /> 
       {/* Hero unit */}
       <Container className={classes.cardGrid} maxWidth="md">
 

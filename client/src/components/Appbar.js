@@ -186,7 +186,7 @@ function PrimarySearchAppBar(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <LogoutButton />
-            <Profile />
+            <Profile userID = {props.userID} />
 
           </div>
 

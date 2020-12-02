@@ -29,15 +29,14 @@ const userSchema = mongoose.Schema({
     type: String,
     maxlength: 50
   },
-  img: {
+  profileImg: {
     type: String,
-    maxlength: 200
   },
   token: {
-      type: String
+    type: String
   },
   tokenExp: {
-      type: Number
+    type: Number
   }
 })
 
