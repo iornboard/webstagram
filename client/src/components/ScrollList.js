@@ -55,7 +55,7 @@ function ScrollList(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [comment, setComment] = useState("");
+  const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [postNum, setPostNum] = useState(3);
@@ -107,8 +107,8 @@ function ScrollList(props) {
   //---------------------------- summit 부분 --------------------------------------
 
 
-  const onCommentHandler = (event) => {
-    setComment(event.currentTarget.value)
+  const onContentHandler = (event) => {
+    setContent(event.currentTarget.value)
   }
 
 
@@ -116,7 +116,7 @@ function ScrollList(props) {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
     let body = {
-      comment: comment,
+      content: content,
       name: " 이메일  : " + props.user + " 님",  ///임시임!!
     }
 
@@ -128,7 +128,7 @@ function ScrollList(props) {
         } else {
 
           callApi().then(res => setPosts(res));
-          setComment("");
+          setContent("");
         }
       })
 
@@ -180,12 +180,12 @@ function ScrollList(props) {
                   required
                   fullWidth
                   type="text"
-                  id="comment"
-                  label="comment"
-                  name="comment"
-                  autoComplete="comment"
-                  value={comment}
-                  onChange={onCommentHandler}
+                  id="content"
+                  label="content"
+                  name="content"
+                  autoComplete="content"
+                  value={content}
+                  onChange={onContentHandler}
                   className={classes.margin} />
               </Grid>
             </Grid>

@@ -8,7 +8,7 @@ const User = ({ post }) =>
 
 <Container paddingTop = 'spacing(8)' paddingBottom = 'spacing(8)' maxWidth="md">
   <CardContent display = 'flex' flexDirection = 'column'>
-    <PostCard name = {post.name}  text = {post.comment} />
+    <PostCard name = {post.name}  text = {post.content} />
   </CardContent>
 </Container>
 

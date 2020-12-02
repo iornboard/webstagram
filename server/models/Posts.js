@@ -1,22 +1,28 @@
 const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
-    comment: {
-        type: String,
-        maxlength: 200
+    userID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
-    name: {
+    content: {
         type: String,
-        maxlength: 50
+        maxlength: 300
     },
     img: {
         type: String,
-        minlength: 100
+        minlength: 200
     },
-    like: {
-        type: String,
-        maxlength: 10
-    }
+    createdAt: {
+        type: Date, 
+        default: Date.now 
+    },
+    isDeleted: {
+        type: Boolean,
+    },
+    likeCount: {
+        type: Number,
+    },
   })
 
 

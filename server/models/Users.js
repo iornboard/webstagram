@@ -11,21 +11,28 @@ const userSchema = mongoose.Schema({
   email: {
       type: String,
       trim: true,
-      unique: 1
+      maxlength: 50
   },
   password: {
       type: String,
       minlength: 5
   },
-  lastname: {
+  location: {
       type: String,
       maxlength: 50
   },
-  role: {
-      type: Number,
-      default: 0
+  birthday: {
+    type: String,
+    maxlength: 50
   },
-  image: String,
+  job: {
+    type: String,
+    maxlength: 50
+  },
+  img: {
+    type: String,
+    maxlength: 200
+  },
   token: {
       type: String
   },
