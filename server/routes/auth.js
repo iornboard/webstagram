@@ -65,9 +65,10 @@ router.post('/login', (req, res) => {
       isAuth: true,
       email: req.user.email,
       name: req.user.name,
-      lastname: req.user.lastname,
-      role: req.user.role,
-      image: req.user.image
+      location: req.user.location,
+      birthday: req.user.birthday,
+      job: req.user.job,
+      profileImg: req.user.profileImg,
     })
   })
   

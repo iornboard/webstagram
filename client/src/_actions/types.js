@@ -3,3 +3,4 @@ export const SIGNUP_USER = "signup_user";
 export const AUTH_USER = "auth_user";
 export const POST = "post";
 export const PROFILE_USER = "profile";
+export const USER = "user";

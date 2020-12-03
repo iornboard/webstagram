@@ -44,8 +44,6 @@ export default function AlertDialogSlide(props) {
     const [job, setJob] = React.useState('');
   
 
-
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -53,7 +51,6 @@ export default function AlertDialogSlide(props) {
     const handleClose = () => {
         setOpen(false);
     };
-
 
    
     const onSubmitHandler = (event) => {
@@ -129,7 +126,7 @@ export default function AlertDialogSlide(props) {
 
                 <Container maxWidth="sm" className={classes.margin} > 
                     <DialogContentText id="alert-dialog-slide-description" className={classes.margin} >
-                     프로필 사진을 입력해 주세요  
+                     프로필 사진을 입력해 주세요  {props.userImg}
                     </DialogContentText>
                     <Avatar src="./han.jpg" />
                     <TextField variant="outlined" type="file" id="file"  name ="file" file={profileImg} value={profileImgName} onChange={handleFileChange} className={classes.margin}/>

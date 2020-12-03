@@ -74,7 +74,9 @@ function Main(props) {
 
   const classes = useStyles();
 
-  const [userID, setUserID] = useState("");  // 임시임(4)
+  const [userID, setUserID] = useState(""); 
+  const [userName, setUserName] = useState(""); 
+  const [userImg, setUserImg] = useState(""); 
 
 
   // 시작과 동시에 쿠키에서 유저 이메일을 가져온다.
@@ -82,15 +84,17 @@ function Main(props) {
     const response = await fetch('/api/auth/auth');
     const auth = await response.json();
     setUserID(auth._id); 
+    setUserName(auth.name);
+    setUserImg(auth.profileImg);
   }, []);
 
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative" userID ={userID} >
+      <AppBar position="relative" userID ={userID} userImg = {userImg} >
       </AppBar>
-        사용자 : {userID} // 임시임
+        사용자 : {userName} 
       <ScrollList userID ={userID} /> 
       {/* Hero unit */}
       <Container className={classes.cardGrid} maxWidth="md">
