@@ -2,7 +2,7 @@
 
 
 # uploads
-/uploads
+server/uploads
 
 # dependencies
 /node_modules
