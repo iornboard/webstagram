@@ -95,7 +95,7 @@ function Main(props) {
       <AppBar position="relative" userID ={userID} userImg = {userImg} >
       </AppBar>
         사용자 : {userName} 
-      <ScrollList userID ={userID} /> 
+      <ScrollList userID ={userID} userImg = {userImg} /> 
       {/* Hero unit */}
       <Container className={classes.cardGrid} maxWidth="md">
 
