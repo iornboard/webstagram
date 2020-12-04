@@ -36,8 +36,8 @@ mongoose.connect('mongodb+srv://thswlsqls:test1234mongodb@cluster0.ha0bc.mongodb
 
 //기타 미들웨어 설정
 app.use(morgan('dev'));  // 로그 표현 방식중에 dev를 사용한다.
-app.use(express.static(path.join(__dirname, 'public')));  // ()안의 폴더 내용의 이름을 합친다. (__dirname == 폴더 위치) 
-app.use('/img', express.static(path.join(__dirname, 'uploads')));   // 기본적으로는 public 폴더를 사용하겠지만 /img 요청이 들어온다면 uploads 폴더를 사용할 것임
+// app.use(express.static(path.join(__dirname, 'public')));  // ()안의 폴더 내용의 이름을 합친다. (__dirname == 폴더 위치) 
+// app.use('/img', express.static(path.join(__dirname, 'uploads')));   // 기본적으로는 public 폴더를 사용하겠지만 /img 요청이 들어온다면 uploads 폴더를 사용할 것임
 app.use(bodyParser.urlencoded({extended: true})); //application/X-www-form-urlencoded
 app.use(bodyParser.json()); //application/json
 app.use(cookieParser(process.env.COOKIE_SECRET));
