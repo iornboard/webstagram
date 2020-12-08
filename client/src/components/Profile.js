@@ -72,7 +72,6 @@ export default function AlertDialogSlide(props) {
             }
         })
 
-        console.log(profileImg);
         setProfileImg(null);   // 이부분 수정하고 싶은데...
         setProfileImgName('');
         setLocation('');

@@ -47,16 +47,16 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const User = ({ post }) => 
+const Post = ({ post }) => 
 
 
 <Container paddingTop = 'spacing(8)' paddingBottom = 'spacing(8)' maxWidth="md">
   <CardContent display = 'flex' flexDirection = 'column'>
-    <PostCard name = {post.name}  text = {post.content} />
+    <PostCard name = {post.name}  content = {post.content} postImg = {post.postImg}/>
   </CardContent>
 </Container>
 
-export default User;
+export default Post;
 
 function PostCard( props ) {
   const classes = useStyles();
@@ -83,12 +83,12 @@ function PostCard( props ) {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image= { "/uploads/"+ props.postImg }
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-           {props.text}
+           {props.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

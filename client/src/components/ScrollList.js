@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
-import { post } from '../_actions/user_action';
+import { post , img } from '../_actions/user_action';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,6 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 // import DialogContentText from '@material-ui/core/DialogContentText';
 // import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import CardMedia from '@material-ui/core/CardMedia';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
   },
 }));
 
@@ -59,8 +64,9 @@ function ScrollList(props) {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [postNum, setPostNum] = useState(3);
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = useState(false);
+  const [postImg, setpostImg] = useState(null);
+  const [postImgName, setpostImgName] = useState("");
   //------------------------------다이얼로그------------------------------------- 
 
 
@@ -79,7 +85,7 @@ function ScrollList(props) {
   useEffect(() => {
     const loadUsers = async () => {
       setLoading(true);
-      callApi().then(res => setPosts(res));
+      callApiPost().then(res => setPosts(res));
       setLoading(false);
     };
 
@@ -91,34 +97,36 @@ function ScrollList(props) {
     const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
 
     if (scrollHeight - scrollTop === clientHeight) {
-      callApi().then(res => setPosts(res));
+      callApiPost().then(res => setPosts(res));
       setPostNum(prev => prev + 3);
     }
 
   };
 
 
-  const callApi = async () => {
+  const callApiPost = async () => {
     const response = await fetch('/api/posts/get');
     const post = await response.json();
     return post.filter((c, index) => index < postNum);
   }
 
-  //---------------------------- summit 부분 --------------------------------------
-
-
-  const onContentHandler = (event) => {
-    setContent(event.currentTarget.value)
+  const callApiImg = async () => {
+    const response = await fetch('/api/posts/img',{ method : "POST" });
+    const img = await response.json();
+    console.log("출력");
+    return img;
   }
+
+  //---------------------------- summit 부분 --------------------------------------
 
 
   const onSubmitHandler = (event) => {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
-    let body = {
-      content: content,
-      //name: " 이메일  : " + props.user + " 님",  ///임시임!!
-    }
+    const body = new FormData();
+    body.append("userID", props.userID);
+    body.append("content", content);
+    body.append("postImg", postImg);
 
 
     dispatch(post(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
@@ -127,7 +135,7 @@ function ScrollList(props) {
           props.history.push('/') //리액트에서 페이지를 이동 방법
         } else {
 
-          callApi().then(res => setPosts(res));
+          callApiPost().then(res => setPosts(res));
           setContent("");
         }
       })
@@ -135,6 +143,26 @@ function ScrollList(props) {
     setOpen(false);
   }
 
+  const onContentHandler = (event) => {
+    setContent(event.currentTarget.value)
+  }
+
+  const handleFileChange = (event) => {
+    setpostImg(event.target.files[0]);
+    setpostImgName(event.target.value);
+
+    const body = new FormData();
+    body.append("postImg", postImg);
+
+    dispatch(img(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
+    .then(response => {
+      if (response.payload.loginSuccess) {
+        props.history.push('/') //리액트에서 페이지를 이동 방법
+      } else { }
+    callApiImg();
+    })
+    
+}
 
   //------------------------------------------------------------------------
 
@@ -173,8 +201,13 @@ function ScrollList(props) {
                 글자를 입력해주세요
                 </Box>
             </Typography>
+              <CardMedia
+                className={classes.media}
+                image= { "/uploads/noname011607415553322.png" }
+              />
             <Grid container spacing={2}>
               <Grid item xs={15}>
+                <TextField variant="outlined" type="file" id="file"  name ="file" file={postImg} value={postImgName} onChange={handleFileChange} className={classes.margin}/>
                 <TextField
                   variant="outlined"
                   required

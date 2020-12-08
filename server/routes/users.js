@@ -3,10 +3,9 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs'); // 파일 시스템, multer 까지 씀
 
-const { User } = require('../models/Users');
-
 const router = express.Router();
 
+const { User } = require('../models/Users');
 
 try {
     fs.readdirSync('client/public/uploads');  // 디렉토리 즉 폴더를 읽어온다는데 , 읽어와서 어떻게 한다는 건지는 모르겠음
@@ -32,7 +31,6 @@ const upload = multer({
   
 router.post('/profileUpdate', upload.single('profileImg'), async (req, res) => {
 
-    console.log(req.body.job);
     await User.updateMany({ _id : req.body.userID }, { $set: { location: req.body.location, birthday: req.body.birthday, job: req.body.job, profileImg: req.file.filename } }, {upsert: true})
         .then((result) => {
             res.json(result);

@@ -9,9 +9,8 @@ const postSchema = mongoose.Schema({
         type: String,
         maxlength: 300
     },
-    img: {
+    postImg: {
         type: String,
-        minlength: 200
     },
     createdAt: {
         type: Date, 

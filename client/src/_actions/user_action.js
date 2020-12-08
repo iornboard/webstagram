@@ -6,7 +6,7 @@ import {
     AUTH_USER,
     POST,
     PROFILE_USER,
-    USER
+    IMG,
 } from './types';
 
 
@@ -54,7 +54,7 @@ export function auth() {
 
 export function post(dataToSubmit) {
     
-    const request = Axios.post('/api/posts/create', dataToSubmit)
+    const request = Axios.post('/api/posts/create', dataToSubmit , config)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
@@ -75,13 +75,13 @@ export function profileUser(dataToSubmit) {
     }
 }
 
-export function user(dataToSubmit) {
+export function img(dataToSubmit) {
     
-    const request = Axios.post('/api/users/user', dataToSubmit)
+    const request = Axios.post('/api/posts/img', dataToSubmit, config)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
-        type: USER,
+        type: IMG,
         payload: request
     }
 }
