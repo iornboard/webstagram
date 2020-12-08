@@ -52,7 +52,7 @@ const Post = ({ post }) =>
 
 <Container paddingTop = 'spacing(8)' paddingBottom = 'spacing(8)' maxWidth="md">
   <CardContent display = 'flex' flexDirection = 'column'>
-    <PostCard name = {post.name}  content = {post.content} postImg = {post.postImg}/>
+    <PostCard content = {post.content} postImg = {post.postImg} profileImg = {post.userID.profileImg} name = {post.userID.name} />
   </CardContent>
 </Container>
 
@@ -70,7 +70,7 @@ function PostCard( props ) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} >
+          <Avatar aria-label="recipe" src= { props.profileImg } className={classes.avatar} >
           </Avatar>
         }
         action={
@@ -81,11 +81,7 @@ function PostCard( props ) {
         title= {props.name}
         subheader="September 14, 2016"
       />
-      <CardMedia
-        className={classes.media}
-        image= { "/uploads/"+ props.postImg }
-        title="Paella dish"
-      />
+      { props.postImg ? <CardMedia className={classes.media} image= { props.postImg }title = "Paella dish"/> : <div/> }
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
            {props.content}

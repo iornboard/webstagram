@@ -34,15 +34,13 @@ const upload = multer({
     res.json({ url: url });  // 응답을 json 파일로 하는 듯, 
   });
 
-  const __upload = multer();
-
   router.post('/create', upload.single('postImg') ,async (req, res, next) => {
       
     //정보들을 client에서 가져오면 
     //그것들을 데이터 베이스에 넣어준다.
     console.log(req.file);
   
-    const post = new Post({ userID : req.body.userID , content : req.body.content , postImg : req.file.filename});
+    const post = new Post({ userID : req.body.userID , content : req.body.content , postImg : "/uploads/" + req.file.filename});
   
      post.save((err, userInfo) => { //mongoose의 메서드이다.
         if(err) return res.json({ success: false, err })
@@ -54,7 +52,7 @@ const upload = multer({
 
 
   router.get('/get' , async  (req, res, next) => {
-    const comment = await Post.find().sort({'_id': -1});
+    const comment = await Post.find().populate('userID').sort({'_id': -1});  // populate -> 내부의 키와 연관된 것을 합쳐서 반환한다.
     res.send(comment);
    });
    

@@ -108,7 +108,7 @@ export default function AlertDialogSlide(props) {
 
             <IconButton
                 onClick={handleClickOpen}>
-                <Avatar src= { "/uploads/"+ props.userImg } />
+                <Avatar src= { props.userImg } />
             </IconButton>
 
 
@@ -127,7 +127,7 @@ export default function AlertDialogSlide(props) {
                     <DialogContentText id="alert-dialog-slide-description" className={classes.margin} >
                      프로필 사진을 입력해 주세요 
                     </DialogContentText>
-                    <Avatar src= { "/uploads/" + props.userImg } />
+                    <Avatar src= { props.userImg } />
                     <TextField variant="outlined" type="file" id="file"  name ="file" file={profileImg} value={profileImgName} onChange={handleFileChange} className={classes.margin}/>
                     <TextField variant="outlined" type="text" id="location"  name ="location" label="사는 곳"  value={location} onChange={handleLocationChange} className={classes.margin}/>
                     <TextField variant="outlined" type="text" id="birthday"  name ="birthday" label="생일"  value={birthday} onChange={handleBirthdayChange} className={classes.margin}/>
