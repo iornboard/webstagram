@@ -12,6 +12,7 @@ import ScrollList from '../components/ScrollList';
 
 
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -98,7 +99,6 @@ function Main(props) {
       <ScrollList userID ={userID} userImg = {userImg} /> 
       {/* Hero unit */}
       <Container className={classes.cardGrid} maxWidth="md">
-
         {/* End hero unit */}
       </Container>
       {/* Footer */}

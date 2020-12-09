@@ -79,7 +79,7 @@ export default function AlertDialogSlide(props) {
         setJob('');
         handleClose();
 
-        //window.location.reload(); 화면을 새로고침하는 메서드
+        window.location.reload();
     }
 
 

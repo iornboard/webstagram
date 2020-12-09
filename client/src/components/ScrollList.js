@@ -16,6 +16,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 // import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import CardMedia from '@material-ui/core/CardMedia';
+import GridList from '@material-ui/core/GridList';
+import Toolbar from '@material-ui/core/Toolbar';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Container from '@material-ui/core/Container';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,23 +34,26 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
+  gridList: {
+    height: 800,
+  },
+  grid: {
+    width : '50%',
+  },
+  fabButton: {
+    zIndex: 1,
+    top: -30,
+    left: 0,
+    right: 0,
+    margin: '0 auto',
+  },
 }));
-
-
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const Content = styled.div`
-  display: grid;
-  width: 800px;
-  height: 1000px;
-  margin: 0 auto;
-  overflow: auto;
-
-`;
 
 export const Loading = styled.div`
   width: 200px;
@@ -102,7 +110,6 @@ function ScrollList(props) {
     }
 
   };
-
 
   const callApiPost = async () => {
     const response = await fetch('/api/posts/get');
@@ -168,18 +175,18 @@ function ScrollList(props) {
 
   return (
 
-    <div className='ScrollList'>
+    <div >
       <Dialog />
-
-      <Grid alignItems='baseline'>
-        <Button variant="outlined" fullWidth color="primary" variant="contained" className={classes.margin} onClick={handleClickOpen} >
-          입력해주세요
-          </Button>
-
-        <Content onScroll={handleScroll} >
-          {posts ? posts.map((pos) => <Post key={pos._id} post={pos} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
-        </Content>
-      </Grid>
+        <Container alignItems='baseline'  className={classes.grid}>
+            <GridList cellHeight={60} className={classes.gridList} cols={3}  onScroll={handleScroll}>
+              {posts ? posts.map((pos) => <Post key={pos._id} post={pos} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
+            </GridList>
+              <Toolbar>
+                <Fab color="secondary" aria-label="add" onClick={handleClickOpen} className={classes.fabButton}>
+                  <AddIcon />
+                </Fab>
+              </Toolbar>
+        </Container>
 
       {loading && <Loading>Loading ...</Loading>}
 
