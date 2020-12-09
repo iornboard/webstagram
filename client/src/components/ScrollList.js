@@ -179,7 +179,7 @@ function ScrollList(props) {
       <Dialog />
         <Container alignItems='baseline'  className={classes.grid}>
             <GridList cellHeight={60} className={classes.gridList} cols={3}  onScroll={handleScroll}>
-              {posts ? posts.map((pos) => <Post key={pos._id} post={pos} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
+              {posts ? posts.map((pos) => <Post key={pos._id} post={pos} user={props.userID} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
             </GridList>
               <Toolbar>
                 <Fab color="secondary" aria-label="add" onClick={handleClickOpen} className={classes.fabButton}>

@@ -4,3 +4,5 @@ export const AUTH_USER = "auth_user";
 export const POST = "post";
 export const PROFILE_USER = "profile";
 export const IMG = "img";
+export const COMMENT = "comment";
+export const GETCOMMENT = "getComment";

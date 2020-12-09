@@ -6,6 +6,7 @@ const fs = require('fs'); // 파일 시스템, multer 까지 씀
 const router = express.Router();
 
 const { Post } = require('../models/Posts');
+const { Comment } = require('../models/Comments');
 
 try {
   fs.readdirSync('client/public/uploads');  // 디렉토리 즉 폴더를 읽어온다는데 , 읽어와서 어떻게 한다는 건지는 모르겠음
@@ -52,9 +53,29 @@ const upload = multer({
 
 
   router.get('/get' , async  (req, res, next) => {
-    const comment = await Post.find().populate('userID').sort({'_id': -1});  // populate -> 내부의 키와 연관된 것을 합쳐서 반환한다.
-    res.send(comment);
+    const post = await Post.find().populate('userID').sort({'_id': -1});  // populate -> 내부의 키와 연관된 것을 합쳐서 반환한다.
+    res.send(post);
    });
    
 
+   router.post('/comment' , async  (req, res, next) => {
+
+    const comment = new Comment(req.body);
+    comment.save((err, userInfo) => { //mongoose의 메서드이다.
+      if(err) return res.json({ success: false, err })
+      return res.status(200).json({
+          success: true
+      })
+    })
+   });
+   
+
+   router.post('/getComment' , async  (req, res, next) => {
+    const postID = await req.body.postID;
+    const comments = await Comment.find({ postID : postID }).populate('userID');  // populate -> 내부의 키와 연관된 것을 합쳐서 반환한다.
+    res.send(comments); 
+   });
+   
+
+   
   module.exports = router ;

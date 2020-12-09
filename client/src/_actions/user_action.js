@@ -7,6 +7,8 @@ import {
     POST,
     PROFILE_USER,
     IMG,
+    COMMENT,
+    GETCOMMENT,
 } from './types';
 
 
@@ -82,6 +84,28 @@ export function img(dataToSubmit) {
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
         type: IMG,
+        payload: request
+    }
+}
+
+export function comment(dataToSubmit) {
+    
+    const request = Axios.post('/api/posts/comment', dataToSubmit)
+        .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
+
+    return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
+        type: COMMENT,
+        payload: request
+    }
+}
+
+export function getComment(dataToSubmit) {
+    
+    const request = Axios.post('/api/posts/getComment', dataToSubmit)
+        .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
+
+    return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
+        type: GETCOMMENT,
         payload: request
     }
 }
