@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { comment, getComment , like} from '../_actions/user_action';
+import { comment, getComment , like , profile} from '../_actions/user_action';
 import Comment from './Comment';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -34,9 +34,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 const useStyles = makeStyles((theme) => ({
+  marginLeft: {
+    marginLeft: theme.spacing(7),
+    marginRight: theme.spacing(7)
+  },
   margin: {
+    marginLeft: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'row',
+    alignItems: 'left',
   },
   media: {
     height: 0,
@@ -72,7 +79,7 @@ const Post = ({ post, user }) =>
 
   <Container paddingTop='spacing(8)' paddingBottom='spacing(8)' maxWidth="md">
     <CardContent display='flex' flexDirection='column'>
-      <PostCard content={post.content} postImg={post.postImg} profileImg={post.userID.profileImg} name={post.userID.name} postID={post._id} userID={user} />
+      <PostCard content={post.content} postImg={post.postImg} profileImg={post.userID.profileImg} name={post.userID.name} postID={post._id} postOwner={post.userID._id} userID={user} />
     </CardContent>
   </Container>
 
@@ -103,6 +110,8 @@ function PostCard(props) {
   const onCommentsHandler = (event) => {
     setComments(event.currentTarget.value)
   };
+
+
 
 
   const onSubmitHandler = (event) => {
@@ -146,7 +155,7 @@ function PostCard(props) {
 
       <CardHeader
         avatar={
-          <AlertProfile profileImg={props.profileImg} />
+          <AlertProfile profileImg={props.profileImg} postOwner={props.postOwner} />
         }
         action={
           <IconButton aria-label="settings">
@@ -197,14 +206,34 @@ function PostCard(props) {
 
 
 
-
-
-
 export function AlertProfile(props) {
   const [open, setOpen] = React.useState(false);
+  const [profileName, setProfileName ] = React.useState("");
+  const [profileLocation, setProfileLocation ] = React.useState("");
+  const [profileBirthday, setProfileBirthday ] = React.useState("");
+  const [profileJob, setProfileJob ] = React.useState("");
+  const [profileImg, setProfileImg ] = React.useState("");
+
+  const classes = useStyles();
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
+
+    const body = {
+      userID: props.postOwner
+    }
+
+    dispatch(profile(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
+      .then(response => {
+        setProfileName(response.payload[0].name);
+        setProfileLocation(response.payload[0].location);
+        setProfileBirthday(response.payload[0].birthday);
+        setProfileJob(response.payload[0].job);
+        setProfileImg(response.payload[0].profileImg);
+      })
+
+
   };
 
   const handleClose = () => {
@@ -214,7 +243,7 @@ export function AlertProfile(props) {
   return (
     <div>
       <IconButton onClick={handleClickOpen}>
-        <Avatar aria-label="recipe" src={props.profileImg}>
+        <Avatar aria-label="recipe" src={profileImg}>
         </Avatar>
       </IconButton>
       <Dialog
@@ -224,19 +253,29 @@ export function AlertProfile(props) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title"> {"이름 : " + profileName} </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <Avatar aria-label="recipe" src={props.profileImg}>
-            </Avatar>
+            <Avatar aria-label="recipe" src={props.profileImg} />
+            <div className={classes.margin} >
+              <Typography className={classes.margin}>
+                팔로워
+              </Typography>
+              <Typography className={classes.marginLeft}>
+                팔로잉
+              </Typography>
+            </div>
+            {profileLocation ? <Typography className={classes.margin}> {"사는 곳 : " + profileLocation} </Typography> : <Typography className={classes.margin}> 사는 곳 : 내용을 입력해주세요! </Typography> }
+            {profileBirthday ? <Typography className={classes.margin}> {"생일 : " + profileBirthday} </Typography> : <Typography className={classes.margin}> 생일 : 내용을 입력해주세요! </Typography> } 
+            {profileJob ? <Typography className={classes.margin}> {"직업 : " + profileJob} </Typography> : <Typography className={classes.margin}> 직업 : 내용을 입력해주세요! </Typography> }
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            Follow
           </Button>
           <Button onClick={handleClose} color="primary">
-            Agree
+            close
           </Button>
         </DialogActions>
       </Dialog>

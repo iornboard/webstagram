@@ -7,3 +7,4 @@ export const IMG = "img";
 export const COMMENT = "comment";
 export const GETCOMMENT = "getComment";
 export const LIKE = "like";
+export const PROFILE = "profile";

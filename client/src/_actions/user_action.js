@@ -10,21 +10,22 @@ import {
     COMMENT,
     GETCOMMENT,
     LIKE,
+    PROFILE,
 } from './types';
 
 
 const config = {
-        headers: {
-            'content-type' : 'multipart/form-data'
-        } 
+    headers: {
+        'content-type': 'multipart/form-data'
     }
+}
 
 
 
 export function loginUser(dataToSubmit) {
-    
+
     const request = Axios.post('/api/auth/login', dataToSubmit) //입력받은 데이터를 인자로 갖고 서버로 요청을 보낸다.
-        .then(response => response.data ) //요청을 보내서 서버에서 받은 응답을 저장한다.
+        .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
         type: LOGIN_USER, //전달하는 데이터를 구분하기 위한 것이다.
@@ -33,7 +34,7 @@ export function loginUser(dataToSubmit) {
 }
 
 export function SignUpUser(dataToSubmit) {
-    
+
     const request = Axios.post('/api/auth/signup', dataToSubmit)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
@@ -44,7 +45,7 @@ export function SignUpUser(dataToSubmit) {
 }
 
 export function auth() {
-    
+
     const request = Axios.get('/api/auth/auth')
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
@@ -53,11 +54,11 @@ export function auth() {
         payload: request
     }
 }
- 
+
 
 export function post(dataToSubmit) {
-    
-    const request = Axios.post('/api/posts/create', dataToSubmit , config)
+
+    const request = Axios.post('/api/posts/create', dataToSubmit, config)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
@@ -68,7 +69,7 @@ export function post(dataToSubmit) {
 
 
 export function profileUser(dataToSubmit) {
-    
+
     const request = Axios.post('/api/users/profileUpdate', dataToSubmit, config)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
@@ -79,7 +80,7 @@ export function profileUser(dataToSubmit) {
 }
 
 export function img(dataToSubmit) {
-    
+
     const request = Axios.post('/api/posts/img', dataToSubmit, config)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
@@ -90,7 +91,7 @@ export function img(dataToSubmit) {
 }
 
 export function comment(dataToSubmit) {
-    
+
     const request = Axios.post('/api/comments/create', dataToSubmit)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
@@ -101,7 +102,7 @@ export function comment(dataToSubmit) {
 }
 
 export function getComment(dataToSubmit) {
-    
+
     const request = Axios.post('/api/comments/get', dataToSubmit)
         .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
 
@@ -118,6 +119,17 @@ export function like(dataToSubmit) {
 
     return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
         type: LIKE,
+
+    }
+}
+
+export function profile(dataToSubmit) {
+
+    const request = Axios.post('/api/users/profile', dataToSubmit)
+        .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
+
+    return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
+        type: PROFILE,
         payload: request
     }
 }
