@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/posts');
 const userRouter = require('./routes/users');
+const commentRouter = require('./routes/comments');
 
 //dotenv.config();  // env 파일을 환경변수로 설정 
 //passportConfig();  // ?? 
@@ -51,6 +52,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/users', userRouter);
+app.use('/api/comments', commentRouter);
 
 
 // app.get('/', (req, res) => {

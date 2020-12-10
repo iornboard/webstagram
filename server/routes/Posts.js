@@ -6,7 +6,7 @@ const fs = require('fs'); // 파일 시스템, multer 까지 씀
 const router = express.Router();
 
 const { Post } = require('../models/Posts');
-const { Comment } = require('../models/Comments');
+
 
 try {
   fs.readdirSync('client/public/uploads');  // 디렉토리 즉 폴더를 읽어온다는데 , 읽어와서 어떻게 한다는 건지는 모르겠음
@@ -30,18 +30,17 @@ const upload = multer({
 });
 
   router.post('/img', upload.single('postImg'), (req, res, next) => {  // '/img' 요청이 온다면, 로그인 중인지를 미들웨어를 통해 확인하고, img 를 업로드 한다. 
-    const url = req.file.filename;
-    console.log(url);
-    res.json({ url: url });  // 응답을 json 파일로 하는 듯, 
+    res.json({ url: "/uploads/" + req.file.filename});  
   });
+
+
 
   router.post('/create', upload.single('postImg') ,async (req, res, next) => {
       
     //정보들을 client에서 가져오면 
     //그것들을 데이터 베이스에 넣어준다.
-    console.log(req.file);
   
-    const post = new Post({ userID : req.body.userID , content : req.body.content , postImg : "/uploads/" + req.file.filename});
+    const post = new Post({ userID : req.body.userID , content : req.body.content , postImg : req.body.postImg});
   
      post.save((err, userInfo) => { //mongoose의 메서드이다.
         if(err) return res.json({ success: false, err })
@@ -55,25 +54,6 @@ const upload = multer({
   router.get('/get' , async  (req, res, next) => {
     const post = await Post.find().populate('userID').sort({'_id': -1});  // populate -> 내부의 키와 연관된 것을 합쳐서 반환한다.
     res.send(post);
-   });
-   
-
-   router.post('/comment' , async  (req, res, next) => {
-
-    const comment = new Comment(req.body);
-    comment.save((err, userInfo) => { //mongoose의 메서드이다.
-      if(err) return res.json({ success: false, err })
-      return res.status(200).json({
-          success: true
-      })
-    })
-   });
-   
-
-   router.post('/getComment' , async  (req, res, next) => {
-    const postID = await req.body.postID;
-    const comments = await Comment.find({ postID : postID }).populate('userID');  // populate -> 내부의 키와 연관된 것을 합쳐서 반환한다.
-    res.send(comments); 
    });
    
 

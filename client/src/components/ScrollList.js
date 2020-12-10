@@ -71,10 +71,11 @@ function ScrollList(props) {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
-  const [postNum, setPostNum] = useState(3);
+  const [postNum, setPostNum] = useState(5);
   const [open, setOpen] = useState(false);
   const [postImg, setpostImg] = useState(null);
   const [postImgName, setpostImgName] = useState("");
+  const [ url, setUrl ] = useState("");
   //------------------------------다이얼로그------------------------------------- 
 
 
@@ -117,12 +118,6 @@ function ScrollList(props) {
     return post.filter((c, index) => index < postNum);
   }
 
-  const callApiImg = async () => {
-    const response = await fetch('/api/posts/img',{ method : "POST" });
-    const img = await response.json();
-    console.log("출력");
-    return img;
-  }
 
   //---------------------------- summit 부분 --------------------------------------
 
@@ -133,7 +128,7 @@ function ScrollList(props) {
     const body = new FormData();
     body.append("userID", props.userID);
     body.append("content", content);
-    body.append("postImg", postImg);
+    body.append("postImg", url);
 
 
     dispatch(post(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
@@ -144,6 +139,8 @@ function ScrollList(props) {
 
           callApiPost().then(res => setPosts(res));
           setContent("");
+          setpostImgName("")
+          setUrl("");
         }
       })
 
@@ -163,10 +160,7 @@ function ScrollList(props) {
 
     dispatch(img(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
     .then(response => {
-      if (response.payload.loginSuccess) {
-        props.history.push('/') //리액트에서 페이지를 이동 방법
-      } else { }
-    callApiImg();
+      setUrl(response.payload.url);
     })
     
 }
@@ -206,11 +200,11 @@ function ScrollList(props) {
             <Typography component="div" variant="h5" className={classes.margin}>
               <Box textAlign="center" m={1}>
                 글자를 입력해주세요
-                </Box>
+              </Box>
             </Typography>
               <CardMedia
                 className={classes.media}
-                image= { "/uploads/noname011607415553322.png" }
+                image= {url}
               />
             <Grid container spacing={2}>
               <Grid item xs={15}>
