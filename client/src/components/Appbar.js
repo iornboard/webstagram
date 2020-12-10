@@ -13,6 +13,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import Button from '@material-ui/core/Button';
 
+
 import IconButton from '@material-ui/core/IconButton';
 
 import Profile from '../components/Profile';
@@ -186,7 +187,7 @@ function PrimarySearchAppBar(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <LogoutButton />
-            <Profile userID = {props.userID} userImg = {props.userImg} />
+            <Profile userID={props.userID} userImg={props.userImg} />
 
           </div>
 

@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
-import { post , img } from '../_actions/user_action';
+import { post, img } from '../_actions/user_action';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     height: 800,
   },
   grid: {
-    width : '50%',
+    width: '100%',
   },
   fabButton: {
     zIndex: 1,
@@ -75,7 +75,7 @@ function ScrollList(props) {
   const [open, setOpen] = useState(false);
   const [postImg, setpostImg] = useState(null);
   const [postImgName, setpostImgName] = useState("");
-  const [ url, setUrl ] = useState("");
+  const [url, setUrl] = useState("");
   //------------------------------다이얼로그------------------------------------- 
 
 
@@ -159,11 +159,11 @@ function ScrollList(props) {
     body.append("postImg", postImg);
 
     dispatch(img(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-    .then(response => {
-      setUrl(response.payload.url);
-    })
-    
-}
+      .then(response => {
+        setUrl(response.payload.url);
+      })
+
+  }
 
   //------------------------------------------------------------------------
 
@@ -171,16 +171,16 @@ function ScrollList(props) {
 
     <div >
       <Dialog />
-        <Container alignItems='baseline'  className={classes.grid}>
-            <GridList cellHeight={60} className={classes.gridList} cols={3}  onScroll={handleScroll}>
-              {posts ? posts.map((pos) => <Post key={pos._id} post={pos} user={props.userID} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
-            </GridList>
-              <Toolbar>
-                <Fab color="secondary" aria-label="add" onClick={handleClickOpen} className={classes.fabButton}>
-                  <AddIcon />
-                </Fab>
-              </Toolbar>
-        </Container>
+      <Container alignItems='baseline' className={classes.grid}>
+        <GridList cellHeight={60} className={classes.gridList} cols={3} onScroll={handleScroll}>
+          {posts ? posts.map((pos) => <Post key={pos._id} post={pos} user={props.userID} className={classes.margin} />) : loading && <Loading>Loading ...</Loading>}
+        </GridList>
+        <Toolbar>
+          <Fab color="secondary" aria-label="add" onClick={handleClickOpen} className={classes.fabButton}>
+            <AddIcon />
+          </Fab>
+        </Toolbar>
+      </Container>
 
       {loading && <Loading>Loading ...</Loading>}
 
@@ -202,13 +202,13 @@ function ScrollList(props) {
                 글자를 입력해주세요
               </Box>
             </Typography>
-              <CardMedia
-                className={classes.media}
-                image= {url}
-              />
+            <CardMedia
+              className={classes.media}
+              image={url}
+            />
             <Grid container spacing={2}>
               <Grid item xs={15}>
-                <TextField variant="outlined" type="file" id="file"  name ="file" file={postImg} value={postImgName} onChange={handleFileChange} className={classes.margin}/>
+                <TextField variant="outlined" type="file" id="file" name="file" file={postImg} value={postImgName} onChange={handleFileChange} className={classes.margin} />
                 <TextField
                   variant="outlined"
                   required

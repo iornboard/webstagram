@@ -12,19 +12,19 @@ import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { profileUser , img } from '../_actions/user_action';
+import { profileUser, img } from '../_actions/user_action';
 
 
 
 
 const useStyles = makeStyles((theme) => ({
     margin: {
-      marginTop: theme.spacing(2),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+        marginTop: theme.spacing(2),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
-  }));
+}));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -42,8 +42,8 @@ export default function AlertDialogSlide(props) {
     const [location, setLocation] = React.useState('');
     const [birthday, setBirthday] = React.useState('');
     const [job, setJob] = React.useState('');
-    const [url,setUrl] = React.useState('');
-  
+    const [url, setUrl] = React.useState('');
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -53,7 +53,7 @@ export default function AlertDialogSlide(props) {
         setOpen(false);
     };
 
-   
+
     const onSubmitHandler = (event) => {
         event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
@@ -65,13 +65,13 @@ export default function AlertDialogSlide(props) {
         body.append("profileImg", profileImg);
 
         dispatch(profileUser(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-        .then(response => {
-            if (response.payload.loginSuccess) {
-            props.history.push('/') //리액트에서 페이지를 이동 방법
-            } else {
+            .then(response => {
+                if (response.payload.loginSuccess) {
+                    props.history.push('/') //리액트에서 페이지를 이동 방법
+                } else {
 
-            }
-        })
+                }
+            })
 
         setProfileImg(null);   // 이부분 수정하고 싶은데...
         setProfileImgName('');
@@ -90,16 +90,16 @@ export default function AlertDialogSlide(props) {
 
         const body = new FormData();
         body.append("profileImg", profileImg);
-    
+
         dispatch(img(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-        .then(response => {
-          setUrl(response.payload.url);
-        })
+            .then(response => {
+                setUrl(response.payload.url);
+            })
     }
 
 
     const handleLocationChange = (event) => {
-        setLocation(event.currentTarget.value);  
+        setLocation(event.currentTarget.value);
     }
 
     const handleBirthdayChange = (event) => {
@@ -117,7 +117,7 @@ export default function AlertDialogSlide(props) {
 
             <IconButton
                 onClick={handleClickOpen}>
-                <Avatar src= { props.userImg } />
+                <Avatar src={props.userImg} />
             </IconButton>
 
 
@@ -132,17 +132,17 @@ export default function AlertDialogSlide(props) {
                 <DialogTitle id="alert-dialog-slide-title">{"사용자 정보 입력"}</DialogTitle>
                 <DialogContent>
 
-                <Container maxWidth="sm" className={classes.margin} > 
-                    <DialogContentText id="alert-dialog-slide-description" className={classes.margin} >
-                     프로필 사진을 입력해 주세요 
+                    <Container maxWidth="sm" className={classes.margin} >
+                        <DialogContentText id="alert-dialog-slide-description" className={classes.margin} >
+                            프로필 사진을 입력해 주세요
                     </DialogContentText>
-                    <Avatar src= { url } />
-                    <TextField variant="outlined" type="file" id="file"  name ="file" file={profileImg} value={profileImgName} onChange={handleFileChange} className={classes.margin}/>
-                    <TextField variant="outlined" type="text" id="location"  name ="location" label="사는 곳"  value={location} onChange={handleLocationChange} className={classes.margin}/>
-                    <TextField variant="outlined" type="text" id="birthday"  name ="birthday" label="생일"  value={birthday} onChange={handleBirthdayChange} className={classes.margin}/>
-                    <TextField variant="outlined" type="text" id="job"  name ="job" label="직업" value={job} onChange={handleJobChange} className={classes.margin}/>
-                    <Button type="submit" onClick={onSubmitHandler} variant="contained" color="primary" className={classes.margin} > 프로필 갱신 </Button>
-                </Container>
+                        <Avatar src={url} />
+                        <TextField variant="outlined" type="file" id="file" name="file" file={profileImg} value={profileImgName} onChange={handleFileChange} className={classes.margin} />
+                        <TextField variant="outlined" type="text" id="location" name="location" label="사는 곳" value={location} onChange={handleLocationChange} className={classes.margin} />
+                        <TextField variant="outlined" type="text" id="birthday" name="birthday" label="생일" value={birthday} onChange={handleBirthdayChange} className={classes.margin} />
+                        <TextField variant="outlined" type="text" id="job" name="job" label="직업" value={job} onChange={handleJobChange} className={classes.margin} />
+                        <Button type="submit" onClick={onSubmitHandler} variant="contained" color="primary" className={classes.margin} > 프로필 갱신 </Button>
+                    </Container>
 
                 </DialogContent>
                 <DialogActions>

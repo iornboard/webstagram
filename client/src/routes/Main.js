@@ -8,7 +8,8 @@ import Link from '@material-ui/core/Link';
 import { withRouter } from 'react-router-dom';
 import AppBar from '../components/Appbar';
 import ScrollList from '../components/ScrollList';
-
+import RightProfile from '../components/RightProfile';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -75,16 +76,16 @@ function Main(props) {
 
   const classes = useStyles();
 
-  const [userID, setUserID] = useState(""); 
-  const [userName, setUserName] = useState(""); 
-  const [userImg, setUserImg] = useState(""); 
+  const [userID, setUserID] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userImg, setUserImg] = useState("");
 
 
   // 시작과 동시에 쿠키에서 유저 이메일을 가져온다.
   useEffect(async () => {
     const response = await fetch('/api/auth/auth');
     const auth = await response.json();
-    setUserID(auth._id); 
+    setUserID(auth._id);
     setUserName(auth.name);
     setUserImg(auth.profileImg);
   }, []);
@@ -93,14 +94,19 @@ function Main(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative" userID ={userID} userImg = {userImg} >
+      <AppBar position="relative" userID={userID} userImg={userImg} >
       </AppBar>
-        사용자 : {userName} 
-      <ScrollList userID ={userID} userImg = {userImg} /> 
-      {/* Hero unit */}
-      <Container className={classes.cardGrid} maxWidth="md">
-        {/* End hero unit */}
-      </Container>
+        사용자 : {userName}
+      <Grid container spacing={3}>
+        <Grid item xs={1}>
+        </Grid>
+        <Grid item xs={8}>
+          <ScrollList userID={userID} userImg={userImg} />
+        </Grid>
+        <Grid item xs={3}>
+          <RightProfile userName={userName} userImg={userImg} />
+        </Grid>
+      </Grid>
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
