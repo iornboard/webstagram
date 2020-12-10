@@ -29,11 +29,9 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 }, // 올릴 수 있는 파일 사이즈? 
 });
 
-  router.post('/img', upload.single('postImg'), (req, res, next) => {  // '/img' 요청이 온다면, 로그인 중인지를 미들웨어를 통해 확인하고, img 를 업로드 한다. 
-    res.json({ url: "/uploads/" + req.file.filename});  
+  router.post('/img', upload.single('img'), async (req, res, next) => {  // '/img' 요청이 온다면, 로그인 중인지를 미들웨어를 통해 확인하고, img 를 업로드 한다. 
+    await res.json({ url: "/uploads/" + req.file.filename});  
   });
-
-
 
   router.post('/create', upload.single('postImg') ,async (req, res, next) => {
       

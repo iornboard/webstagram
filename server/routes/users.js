@@ -31,7 +31,7 @@ const upload = multer({
   
 router.post('/profileUpdate', upload.single('profileImg'), async (req, res) => {
 
-    await User.updateMany({ _id : req.body.userID }, { $set: { location: req.body.location, birthday: req.body.birthday, job: req.body.job, profileImg: "/uploads/" + req.file.filename } }, {upsert: true})
+    await User.updateMany({ _id : req.body.userID }, { $set: { location: req.body.location, birthday: req.body.birthday, job: req.body.job, profileImg: req.body.url } }, {upsert: true})
         .then((result) => {
             res.json(result);
         })

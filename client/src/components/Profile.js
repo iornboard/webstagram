@@ -62,16 +62,9 @@ export default function AlertDialogSlide(props) {
         body.append("location", location);
         body.append("birthday", birthday);
         body.append("job", job);
-        body.append("profileImg", profileImg);
+        body.append("url", url);
 
         dispatch(profileUser(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-            .then(response => {
-                if (response.payload.loginSuccess) {
-                    props.history.push('/') //리액트에서 페이지를 이동 방법
-                } else {
-
-                }
-            })
 
         setProfileImg(null);   // 이부분 수정하고 싶은데...
         setProfileImgName('');
@@ -87,15 +80,16 @@ export default function AlertDialogSlide(props) {
     const handleFileChange = (event) => {
         setProfileImg(event.target.files[0]);
         setProfileImgName(event.target.value);
-
+    
         const body = new FormData();
-        body.append("profileImg", profileImg);
-
+        body.append("img", profileImg);
+    
         dispatch(img(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-            .then(response => {
-                setUrl(response.payload.url);
-            })
-    }
+          .then(response => {
+            setUrl(response.payload.url);
+          })
+    
+      }
 
 
     const handleLocationChange = (event) => {

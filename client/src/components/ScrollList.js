@@ -85,6 +85,11 @@ function ScrollList(props) {
 
   const handleClose = () => {
     setOpen(false);
+
+    setContent("");
+    setpostImgName("")
+    setUrl("");
+
   };
 
 
@@ -156,7 +161,7 @@ function ScrollList(props) {
     setpostImgName(event.target.value);
 
     const body = new FormData();
-    body.append("postImg", postImg);
+    body.append("img", postImg);
 
     dispatch(img(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
       .then(response => {
