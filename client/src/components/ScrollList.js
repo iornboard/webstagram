@@ -156,7 +156,7 @@ function ScrollList(props) {
     setContent(event.currentTarget.value)
   }
 
-  const handleFileChange = (event) => {
+  const handleFileChange =  (event) => {
     setpostImg(event.target.files[0]);
     setpostImgName(event.target.value);
 
@@ -167,6 +167,7 @@ function ScrollList(props) {
       .then(response => {
         setUrl(response.payload.url);
       })
+
 
   }
 
@@ -207,10 +208,7 @@ function ScrollList(props) {
                 글자를 입력해주세요
               </Box>
             </Typography>
-            <CardMedia
-              className={classes.media}
-              image={url}
-            />
+            {url ? <CardMedia className={classes.media} image={url}/> : <div/>}
             <Grid container spacing={2}>
               <Grid item xs={15}>
                 <TextField variant="outlined" type="file" id="file" name="file" file={postImg} value={postImgName} onChange={handleFileChange} className={classes.margin} />

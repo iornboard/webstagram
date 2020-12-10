@@ -7,4 +7,6 @@ export const IMG = "img";
 export const COMMENT = "comment";
 export const GETCOMMENT = "getComment";
 export const LIKE = "like";
+export const GETLIKE = "getLike";
 export const PROFILE = "profile";
+

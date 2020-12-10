@@ -33,8 +33,9 @@ const upload = multer({
     await res.json({ url: "/uploads/" + req.file.filename});  
   });
 
+  const __upload = multer()
 
-  router.post('/create', upload.single('postImg') ,async (req, res, next) => {
+  router.post('/create', __upload.none() ,async (req, res, next) => {
       
     //정보들을 client에서 가져오면 
     //그것들을 데이터 베이스에 넣어준다.
@@ -58,7 +59,7 @@ const upload = multer({
 
    router.post('/like' , async  (req, res, next) => {
      await PostLike.update({ postID : req.body.postID }, { $push: { userID : req.body.userID } }, {upsert: true});
-     likeUsers = await PostLike.find({ postID : req.body.postID },{userID : 1});
+     const likeUsers = await PostLike.find({ postID : req.body.postID },{userID : 1});
      await res.send(likeUsers);
    });
 

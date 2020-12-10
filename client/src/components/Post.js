@@ -17,6 +17,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import UnFavoriteIcon from '@material-ui/icons/FavoriteBorder';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -94,6 +95,8 @@ function PostCard(props) {
   const [comments, setComments] = React.useState("");
   const [commentList, setcommentList] = React.useState([]);
 
+  const [likes, SetLikes] = React.useState(false);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
 
@@ -145,10 +148,13 @@ function PostCard(props) {
     }
 
     dispatch(like(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-    
+    .then(response => {
+       const likeUserList = response.payload[0].userID;
+       if(likeUserList.includes(props.userID)){SetLikes(true)}
+       console.log(likes)
+    })
+
   }
-
-
 
   return (
     <Card className={classes.root}>
@@ -172,9 +178,7 @@ function PostCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={onLikeHandler} > 
-          <FavoriteIcon />
-        </IconButton>
+        { likes ? <IconButton onClick={onLikeHandler} > <FavoriteIcon /> </IconButton> : <IconButton onClick={onLikeHandler} > <UnFavoriteIcon /> </IconButton>}
         <IconButton aria-label="share" onClick={onSubmitHandler}>
           <ShareIcon />
         </IconButton>
@@ -243,9 +247,11 @@ export function AlertProfile(props) {
   return (
     <div>
       <IconButton onClick={handleClickOpen}>
-        <Avatar aria-label="recipe" src={profileImg}>
-        </Avatar>
+        <Avatar  src={props.profileImg}/>
       </IconButton>
+
+    
+    
       <Dialog
         open={open}
         keepMounted
@@ -256,7 +262,7 @@ export function AlertProfile(props) {
         <DialogTitle id="alert-dialog-slide-title"> {"이름 : " + profileName} </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <Avatar aria-label="recipe" src={props.profileImg} />
+            <Avatar aria-label="recipe" src={profileImg} />
             <div className={classes.margin} >
               <Typography className={classes.margin}>
                 팔로워

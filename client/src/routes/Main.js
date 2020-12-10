@@ -96,7 +96,6 @@ function Main(props) {
       <CssBaseline />
       <AppBar position="relative" userID={userID} userImg={userImg} >
       </AppBar>
-        사용자 : {userName}
       <Grid container spacing={3}>
         <Grid item xs={2}>
         </Grid>

@@ -22,6 +22,7 @@ const postSchema = mongoose.Schema({
     likeCount: {
         type: Number,
     },
+    
   })
 
 

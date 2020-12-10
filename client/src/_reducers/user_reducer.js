@@ -8,6 +8,7 @@ import {
     COMMENT,
     GETCOMMENT,
     LIKE,
+    GETLIKE,
     PROFILE,
 } from '../_actions/types';
 
@@ -39,7 +40,10 @@ export default function (state = {}, action) { //리듀서는 이전 스테이�
             break;     
         case LIKE:
             return {...state, postData: action.payload} //이전 스태이트와 액션을 사용한다
-            break;     
+            break;   
+        case GETLIKE:
+            return {...state, postData: action.payload} //이전 스태이트와 액션을 사용한다
+            break;   
         case PROFILE:
             return { ...state, postData: action.payload } //이전 스태이트와 액션을 사용한다
             break;
