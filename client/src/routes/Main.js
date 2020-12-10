@@ -98,12 +98,12 @@ function Main(props) {
       </AppBar>
         사용자 : {userName}
       <Grid container spacing={3}>
-        <Grid item xs={1}>
+        <Grid item xs={2}>
         </Grid>
         <Grid item xs={8}>
           <ScrollList userID={userID} userImg={userImg} />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <RightProfile userName={userName} userImg={userImg} />
         </Grid>
       </Grid>
