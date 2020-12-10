@@ -12,6 +12,8 @@ import {
     LIKE,
     GETLIKE,
     PROFILE,
+    FOLLOWING,
+    GETFOLLOWING,
 } from './types';
 
 
@@ -147,3 +149,30 @@ export function profile(dataToSubmit) {
         payload: request
     }
 }
+
+export function following(dataToSubmit) {
+
+    const request = Axios.post('/api/users/following', dataToSubmit)
+        .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
+
+    return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
+        type: FOLLOWING,
+        payload: request
+    }
+}
+
+
+export function getFollowing(dataToSubmit) {
+
+    const request = Axios.post('/api/users/getFollowing', dataToSubmit)
+        .then(response => response.data) //요청을 보내서 서버에서 받은 응답을 저장한다.
+
+    return { // 그리고 리듀서로 보낸다. 액션은 타입과 서버로부터 받은 reponse로 구성되므로 아래와 같이 반환한다.
+        type: GETFOLLOWING,
+        payload: request
+    }
+}
+
+
+
+

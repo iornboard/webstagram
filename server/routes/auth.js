@@ -69,6 +69,7 @@ router.post('/login', (req, res) => {
       birthday: req.user.birthday,
       job: req.user.job,
       profileImg: req.user.profileImg,
+      following : req.user.following,
     })
   })
   

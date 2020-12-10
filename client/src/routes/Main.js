@@ -102,7 +102,7 @@ function Main(props) {
           <ScrollList userID={userID} userImg={userImg} />
         </Grid>
         <Grid item xs={2}>
-          <RightProfile userName={userName} userImg={userImg} />
+          <RightProfile userName={userName} userImg={userImg} userID={userID} />
         </Grid>
       </Grid>
       {/* Footer */}

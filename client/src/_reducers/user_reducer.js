@@ -10,6 +10,8 @@ import {
     LIKE,
     GETLIKE,
     PROFILE,
+    FOLLOWING,
+    GETFOLLOWING,
 } from '../_actions/types';
 
 export default function (state = {}, action) { //리듀서는 이전 스테이트와 액션을 갖고 다음 스테이트를 반환한다.
@@ -47,8 +49,13 @@ export default function (state = {}, action) { //리듀서는 이전 스테이�
         case PROFILE:
             return { ...state, postData: action.payload } //이전 스태이트와 액션을 사용한다
             break;
+        case FOLLOWING:
+            return { ...state, postData: action.payload } //이전 스태이트와 액션을 사용한다
+            break;
+        case GETFOLLOWING:
+            return { ...state, postData: action.payload } //이전 스태이트와 액션을 사용한다
+            break;
         default:
             return state;
     }
 }
-

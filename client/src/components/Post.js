@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { comment, getComment, like, profile } from '../_actions/user_action';
+import { comment, getComment, like, profile , following , getFollowing } from '../_actions/user_action';
 import Comment from './Comment';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -110,10 +110,12 @@ function PostCard(props) {
       })
   };
 
+
+
+
   const onCommentsHandler = (event) => {
     setComments(event.currentTarget.value)
   };
-
 
 
 
@@ -145,6 +147,7 @@ function PostCard(props) {
   }
 
 
+
   const onLikeHandler = (event) => {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
@@ -167,7 +170,7 @@ function PostCard(props) {
 
       <CardHeader
         avatar={
-          <AlertProfile profileImg={props.profileImg} postOwner={props.postOwner} />
+          <AlertProfile profileImg={props.profileImg} postOwner={props.postOwner} userID = {props.userID} />
         }
         action={
           <IconButton aria-label="settings">
@@ -223,6 +226,8 @@ export function AlertProfile(props) {
   const [profileBirthday, setProfileBirthday] = React.useState("");
   const [profileJob, setProfileJob] = React.useState("");
   const [profileImg, setProfileImg] = React.useState("");
+  const [followings, setfollowings] = React.useState([]);
+  const [isFollowed, setIsFollowed] = React.useState(false);
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -243,12 +248,34 @@ export function AlertProfile(props) {
         setProfileImg(response.payload[0].profileImg);
       })
 
+   dispatch(getFollowing({userID : props.userID}))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
+          .then(response => {
+            setfollowings(response.payload);
 
+          followings.map(((id) => (id.followingID._id == props.postOwner) ?  setIsFollowed(true) : setIsFollowed(false)  ))
+          console.log(isFollowed);
+          })
+    
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+  
+
+  const handleFollowing = () => {
+
+    const body = {
+      followerID : props.userID ,  // 자기 자신
+      followingID : props.postOwner ,  // 팔로잉 할 사람 
+    }
+
+      dispatch(following(body))
+      
+      setOpen(false);
+    };
+
+
 
   return (
     <div>
@@ -283,9 +310,7 @@ export function AlertProfile(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Follow
-          </Button>
+          { !isFollowed ? <Button onClick={handleFollowing} color="primary"> Follow </Button> : <Typography> 팔로잉한 상태입니다! </Typography> }
           <Button onClick={handleClose} color="primary">
             close
           </Button>

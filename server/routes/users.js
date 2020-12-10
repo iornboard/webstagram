@@ -6,7 +6,8 @@ const fs = require('fs'); // 파일 시스템, multer 까지 씀
 const router = express.Router();
 
 const { User } = require('../models/Users');
-const { profile } = require('console');
+const { Follow } = require('../models/Follows');
+
 
 try {
   fs.readdirSync('client/public/uploads');  // 디렉토리 즉 폴더를 읽어온다는데 , 읽어와서 어떻게 한다는 건지는 모르겠음
@@ -47,6 +48,39 @@ router.post('/profile', async (req, res) => {
 
   const profile = await User.find({ _id: req.body.userID }, {password : 0})
   await res.json(profile);
+});
+
+
+router.post('/following', async (req, res) => {
+
+  const following = await User.find({ _id: req.body.followingID }, { _id : 0})
+  if(following){
+
+    const follow = new Follow({ followerID: req.body.followerID , followingID : req.body.followingID });
+
+    follow.save((err, userInfo) => { 
+      if(err) return res.json({ success: false, err })
+      return res.status(200).json({
+          success: true
+      })
+    })
+
+  }else {
+  res.status(404).send('no user'); 
+  }
+  
+});
+
+router.post('/getFollowing', async (req, res) => {
+
+  const followingUser = await Follow.find({ followerID : req.body.userID } , { _id : 0 ,  followingID : 1}).populate('followingID');
+  if(followingUser){
+  res.json(followingUser);  
+
+  }else {
+  res.status(404).send('no user'); 
+  }
+
 });
 
 

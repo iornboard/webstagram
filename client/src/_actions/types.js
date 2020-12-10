@@ -9,4 +9,5 @@ export const GETCOMMENT = "getComment";
 export const LIKE = "like";
 export const GETLIKE = "getLike";
 export const PROFILE = "profile";
-
+export const FOLLOWING = "following";
+export const GETFOLLOWING = "getFollowing";
