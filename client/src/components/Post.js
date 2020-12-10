@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { comment , getComment } from '../_actions/user_action';
+import { comment, getComment } from '../_actions/user_action';
 import Comment from './Comment';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -23,6 +23,15 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TextField from '@material-ui/core/TextField';
+
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -58,18 +67,18 @@ export const Loading = styled.div`
 
 
 
-const Post = ({ post , user}) => 
+const Post = ({ post, user }) =>
 
 
-<Container paddingTop = 'spacing(8)' paddingBottom = 'spacing(8)' maxWidth="md">
-  <CardContent display = 'flex' flexDirection = 'column'>
-    <PostCard content = {post.content} postImg = {post.postImg} profileImg = {post.userID.profileImg} name = {post.userID.name} postID = {post._id} userID = {user}/>
-  </CardContent>
-</Container>
+  <Container paddingTop='spacing(8)' paddingBottom='spacing(8)' maxWidth="md">
+    <CardContent display='flex' flexDirection='column'>
+      <PostCard content={post.content} postImg={post.postImg} profileImg={post.userID.profileImg} name={post.userID.name} postID={post._id} userID={user} />
+    </CardContent>
+  </Container>
 
 export default Post;
 
-function PostCard( props ) {
+function PostCard(props) {
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -81,14 +90,14 @@ function PostCard( props ) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
 
-    const body = { 
-      postID :  props.postID,
+    const body = {
+      postID: props.postID,
     }
 
     dispatch(getComment(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
       .then(response => {
         setcommentList(response.payload);
-      })  
+      })
   };
 
   const onCommentsHandler = (event) => {
@@ -100,10 +109,10 @@ function PostCard( props ) {
     event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
 
 
-    const body = { 
-      comment : comments,
-      userID : props.userID,
-      postID :  props.postID,
+    const body = {
+      comment: comments,
+      userID: props.userID,
+      postID: props.postID,
     }
 
     dispatch(comment(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
@@ -114,36 +123,36 @@ function PostCard( props ) {
         }
       })
 
-      setComments("");
+    setComments("");
   }
 
 
   return (
     <Card className={classes.root}>
+
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" src= { props.profileImg } className={classes.avatar} >
-          </Avatar>
+          <AlertProfile profileImg={props.profileImg} />
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title= {props.name}
+        title={props.name}
         subheader="September 14, 2016"
       />
-      { props.postImg ? <CardMedia className={classes.media} image= { props.postImg }title = "Paella dish"/> : <div/> }
+      { props.postImg ? <CardMedia className={classes.media} image={props.postImg} title="Paella dish" /> : <div />}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-           {props.content}
+          {props.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share" onClick = {onSubmitHandler}>   
+        <IconButton aria-label="share" onClick={onSubmitHandler}>
           <ShareIcon />
         </IconButton>
         <IconButton
@@ -158,13 +167,13 @@ function PostCard( props ) {
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <TextField variant="outlined" value={comments} onChange={onCommentsHandler} fullWidth className={classes.margin} />      
+        <TextField variant="outlined" value={comments} onChange={onCommentsHandler} fullWidth className={classes.margin} />
         <CardContent>
           <Paper>
-            <Table className = {classes.table}>
-              {commentList ? commentList.map((comme) => <Comment comment = {comme} /> ) :  <div/> }
+            <Table className={classes.table}>
+              {commentList ? commentList.map((comme) => <Comment comment={comme} />) : <div />}
             </Table>
-          </Paper>              
+          </Paper>
         </CardContent>
       </Collapse>
     </Card>
@@ -175,3 +184,48 @@ function PostCard( props ) {
 
 
 
+
+
+export function AlertProfile(props) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <IconButton onClick={handleClickOpen}>
+        <Avatar aria-label="recipe" src={props.profileImg}>
+        </Avatar>
+      </IconButton>
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <Avatar aria-label="recipe" src={props.profileImg}>
+            </Avatar>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
