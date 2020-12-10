@@ -80,16 +80,16 @@ export default function AlertDialogSlide(props) {
     const handleFileChange = (event) => {
         setProfileImg(event.target.files[0]);
         setProfileImgName(event.target.value);
-    
+
         const body = new FormData();
         body.append("img", profileImg);
-    
+
         dispatch(img(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
-          .then(response => {
-            setUrl(response.payload.url);
-          })
-    
-      }
+            .then(response => {
+                setUrl(response.payload.url);
+            })
+
+    }
 
 
     const handleLocationChange = (event) => {
