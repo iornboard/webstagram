@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { comment, getComment , like , profile} from '../_actions/user_action';
+import { comment, getComment, like, profile } from '../_actions/user_action';
 import Comment from './Comment';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import UnFavoriteIcon from '@material-ui/icons/FavoriteBorder';
-import ShareIcon from '@material-ui/icons/Share';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Paper from '@material-ui/core/Paper';
@@ -136,6 +136,12 @@ function PostCard(props) {
       })
 
     setComments("");
+  
+    dispatch(getComment({postID: props.postID}))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
+      .then(response => {
+        setcommentList(response.payload);
+      })
+
   }
 
 
@@ -180,7 +186,7 @@ function PostCard(props) {
       <CardActions disableSpacing>
         { likes ? <IconButton onClick={onLikeHandler} > <FavoriteIcon /> </IconButton> : <IconButton onClick={onLikeHandler} > <UnFavoriteIcon /> </IconButton>}
         <IconButton aria-label="share" onClick={onSubmitHandler}>
-          <ShareIcon />
+          <ArrowUpwardIcon />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -194,7 +200,7 @@ function PostCard(props) {
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <TextField variant="outlined" value={comments} onChange={onCommentsHandler} fullWidth className={classes.margin} />
+        <TextField variant="outlined" value={comments} onChange={onCommentsHandler} fullWidth />
         <CardContent>
           <Paper>
             <Table className={classes.table}>
@@ -212,11 +218,11 @@ function PostCard(props) {
 
 export function AlertProfile(props) {
   const [open, setOpen] = React.useState(false);
-  const [profileName, setProfileName ] = React.useState("");
-  const [profileLocation, setProfileLocation ] = React.useState("");
-  const [profileBirthday, setProfileBirthday ] = React.useState("");
-  const [profileJob, setProfileJob ] = React.useState("");
-  const [profileImg, setProfileImg ] = React.useState("");
+  const [profileName, setProfileName] = React.useState("");
+  const [profileLocation, setProfileLocation] = React.useState("");
+  const [profileBirthday, setProfileBirthday] = React.useState("");
+  const [profileJob, setProfileJob] = React.useState("");
+  const [profileImg, setProfileImg] = React.useState("");
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -271,9 +277,9 @@ export function AlertProfile(props) {
                 팔로잉
               </Typography>
             </div>
-            {profileLocation ? <Typography className={classes.margin}> {"사는 곳 : " + profileLocation} </Typography> : <Typography className={classes.margin}> 사는 곳 : 내용을 입력해주세요! </Typography> }
-            {profileBirthday ? <Typography className={classes.margin}> {"생일 : " + profileBirthday} </Typography> : <Typography className={classes.margin}> 생일 : 내용을 입력해주세요! </Typography> } 
-            {profileJob ? <Typography className={classes.margin}> {"직업 : " + profileJob} </Typography> : <Typography className={classes.margin}> 직업 : 내용을 입력해주세요! </Typography> }
+            {profileLocation ? <Typography className={classes.margin}> {"사는 곳 : " + profileLocation} </Typography> : <Typography className={classes.margin}> 사는 곳 : 내용을 입력해주세요! </Typography>}
+            {profileBirthday ? <Typography className={classes.margin}> {"생일 : " + profileBirthday} </Typography> : <Typography className={classes.margin}> 생일 : 내용을 입력해주세요! </Typography>}
+            {profileJob ? <Typography className={classes.margin}> {"직업 : " + profileJob} </Typography> : <Typography className={classes.margin}> 직업 : 내용을 입력해주세요! </Typography>}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
