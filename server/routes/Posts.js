@@ -6,7 +6,7 @@ const fs = require('fs'); // 파일 시스템, multer 까지 씀
 const router = express.Router();
 
 const { Post } = require('../models/Posts');
-
+const { PostLike } = require('../models/PostLikes');
 
 try {
   fs.readdirSync('client/public/uploads');  // 디렉토리 즉 폴더를 읽어온다는데 , 읽어와서 어떻게 한다는 건지는 모르겠음
@@ -33,6 +33,7 @@ const upload = multer({
     await res.json({ url: "/uploads/" + req.file.filename});  
   });
 
+
   router.post('/create', upload.single('postImg') ,async (req, res, next) => {
       
     //정보들을 client에서 가져오면 
@@ -55,5 +56,11 @@ const upload = multer({
    });
    
 
-   
+   router.post('/like' , async  (req, res, next) => {
+     await PostLike.update({ postID : req.body.postID }, { $push: { userID : req.body.userID } }, {upsert: true});
+     likeUsers = await PostLike.find({ postID : req.body.postID },{userID : 1});
+     await res.send(likeUsers);
+   });
+
+
   module.exports = router ;

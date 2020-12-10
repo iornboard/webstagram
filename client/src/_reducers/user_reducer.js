@@ -7,6 +7,7 @@ import {
     IMG,
     COMMENT,
     GETCOMMENT,
+    LIKE,
 } from '../_actions/types';
 
 export default function(state = {}, action) { //리듀서는 이전 스테이트와 액션을 갖고 다음 스테이트를 반환한다.
@@ -33,6 +34,9 @@ export default function(state = {}, action) { //리듀서는 이전 스테이트
             return {...state, postData: action.payload} //이전 스태이트와 액션을 사용한다
             break;
         case GETCOMMENT:
+            return {...state, postData: action.payload} //이전 스태이트와 액션을 사용한다
+            break;     
+        case LIKE:
             return {...state, postData: action.payload} //이전 스태이트와 액션을 사용한다
             break;     
         default:

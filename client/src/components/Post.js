@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { comment, getComment } from '../_actions/user_action';
+import { comment, getComment , like} from '../_actions/user_action';
 import Comment from './Comment';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -30,7 +30,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -127,6 +127,20 @@ function PostCard(props) {
   }
 
 
+  const onLikeHandler = (event) => {
+    event.preventDefault(); //페이지가 리프레시 되는 것을 막는다.
+
+    const body = {
+      userID: props.userID,
+      postID: props.postID,
+    }
+
+    dispatch(like(body))    // 위 바디를 담아서 보낸다고 생각하자  (리엑트/리덕트를 보내는 곳)
+    
+  }
+
+
+
   return (
     <Card className={classes.root}>
 
@@ -149,7 +163,7 @@ function PostCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={onLikeHandler} > 
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share" onClick={onSubmitHandler}>

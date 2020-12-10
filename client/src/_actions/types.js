@@ -6,3 +6,4 @@ export const PROFILE_USER = "profile";
 export const IMG = "img";
 export const COMMENT = "comment";
 export const GETCOMMENT = "getComment";
+export const LIKE = "like";
