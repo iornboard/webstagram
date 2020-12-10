@@ -4,7 +4,7 @@ import './index.css';
 import 'antd/dist/antd.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { Provider } from 'react-redux'; //리덕스와 어플리케이션을 연동시키기 위해 사용한다.
 import 'antd/dist/antd.css';
@@ -13,24 +13,24 @@ import ReduxThunk from 'redux-thunk'; //스토어에서 펑션 형태의 액션�
 import { applyMiddleware, createStore } from 'redux';
 import Reducer from './_reducers';
 
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore) 
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
 
 const theme = createMuiTheme({
-  
-      typography : {
-          fontFamily : '"Noto Sans KR" , serif',
 
-      }
+  typography: {
+    fontFamily: '"Noto Sans KR" , serif',
+
+  }
 })
 
 ReactDOM.render(
   <Provider
-      store={createStoreWithMiddleware(Reducer,
-          window.__REDUX_DEVTOOLS_EXTENSION__&&
-          window.__REDUX_DEVTOOLS_EXTENSION__()
-      )}
-  > 
-   <MuiThemeProvider theme = {theme}>
+    store={createStoreWithMiddleware(Reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__()
+    )}
+  >
+    <MuiThemeProvider theme={theme}>
       <React.StrictMode>
         <App />
       </React.StrictMode>
